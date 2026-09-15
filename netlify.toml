@@ -1,0 +1,31 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    # NOTE: 'unsafe-inline' on script-src is required because the pages use
+    # inline onclick/onkeydown handlers throughout. That means this CSP does
+    # NOT stop inline-script XSS — it does stop loading scripts, frames, or
+    # objects from any host not explicitly listed below, and blocks framing
+    # via frame-ancestors. Removing 'unsafe-inline' would require rewriting
+    # every inline handler to addEventListener() and adding a nonce, which
+    # is a larger refactor than this pass covers.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://wevgliayhioturfuylkz.supabase.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+
+[[headers]]
+  for = "/og-image.svg"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+    Cache-Control = "public, max-age=86400"

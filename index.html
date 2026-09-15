@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadPulse Consultancy — Cold Call Intelligence for Appointment Setters</title>
+<meta name="description" content="Cold call intelligence platform for appointment setters working with listing agents. Search any ZIP code for seller motivation trends, AI-recommended scripts, proven phrases, and closing strategies — all from real call data.">
+<meta name="keywords" content="cold calling scripts, appointment setter, listing agent, real estate cold call, seller motivation, cold call intelligence, real estate scripts, motivated sellers, cold call trends, appointment setting">
+<meta name="author" content="LeadPulse Consultancy">
+<link rel="canonical" href="https://leadpulseconsultancy.com/">
+
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://leadpulseconsultancy.com/">
+<meta property="og:title" content="LeadPulse — Cold Call Intelligence for Appointment Setters">
+<meta property="og:description" content="Search any ZIP code to see what seller motivations dominate, what phrases convert, and whether to go fast or slow. Built by appointment setters, for appointment setters working with listing agents.">
+<meta property="og:image" content="https://leadpulseconsultancy.com/og-image.png">
+<meta property="og:site_name" content="LeadPulse Consultancy">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LeadPulse — Cold Call Intelligence for Appointment Setters">
+<meta name="twitter:description" content="Search any ZIP code for seller motivation trends, AI scripts, and proven phrases. Built from real cold call data.">
+<meta name="twitter:image" content="https://leadpulseconsultancy.com/og-image.png">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "LeadPulse Consultancy",
+  "description": "Cold call intelligence platform for appointment setters working with listing agents. AI-powered seller motivation trends, proven scripts, and closing strategies by ZIP code.",
+  "url": "https://leadpulseconsultancy.com",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "LeadPulse Consultancy"
+  }
+}
+</script>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{--bg-deep:#06090e;--bg-surface:#0b1018;--bg-card:#0f1520;--bg-elevated:#141c28;--border:rgba(255,255,255,0.06);--border-hover:rgba(0,212,170,0.3);--teal:#00d4aa;--teal-dim:#00d4aa88;--teal-glow:rgba(0,212,170,0.15);--red:#ff6b6b;--amber:#fbbf24;--blue:#60a5fa;--purple:#a78bfa;--green:#34d399;--text-primary:#e8ecf0;--text-secondary:#7a8599;--text-muted:#4a5568;--font-display:'Outfit',sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--font-display);background:var(--bg-deep);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -20%,var(--teal-glow) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(0,100,180,0.06) 0%,transparent 50%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+.container{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.site-header{position:sticky;top:0;z-index:100;background:rgba(6,9,14,0.85);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(--border)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo-group{display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;background:var(--teal-glow);border:1px solid rgba(0,212,170,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:600;font-size:12px;color:var(--teal)}
+.logo-text h1{font-size:14px;font-weight:700;color:white;letter-spacing:-0.02em}
+.logo-text span{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-btn{background:none;border:none;color:var(--text-secondary);font-family:var(--font-display);font-size:13px;font-weight:500;padding:8px 14px;border-radius:10px;cursor:pointer;transition:all 0.25s}
+.nav-btn:hover{color:white;background:rgba(255,255,255,0.05)}
+.nav-btn.active{color:white;background:rgba(255,255,255,0.08)}
+.nav-btn.primary{background:var(--teal);color:var(--bg-deep);font-weight:700;margin-left:8px}
+.nav-btn.primary:hover{background:#00e4ba}
+.hero{text-align:center;padding:80px 0 60px;animation:fadeUp 0.6s ease-out}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--teal-glow);border:1px solid rgba(0,212,170,0.2);border-radius:100px;padding:6px 16px;font-size:11px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:24px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.hero h2{font-size:clamp(32px,5vw,56px);font-weight:900;line-height:1.05;letter-spacing:-0.03em;margin-bottom:16px}
+.hero h2 .teal{color:var(--teal)}
+.hero p{font-size:16px;color:var(--text-secondary);max-width:560px;margin:0 auto 40px;line-height:1.6}
+.search-box{max-width:480px;margin:0 auto;display:flex;gap:8px}
+.search-input{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;font-family:var(--font-mono);font-size:16px;color:white;outline:none;transition:border-color 0.3s}
+.search-input::placeholder{color:var(--text-muted)}
+.search-input:focus{border-color:var(--teal)}
+.search-btn{background:var(--teal);border:none;border-radius:14px;padding:16px 28px;color:var(--bg-deep);font-family:var(--font-display);font-size:14px;font-weight:700;cursor:pointer;transition:all 0.25s;white-space:nowrap}
+.search-btn:hover{background:#00e4ba;transform:translateY(-1px)}
+.search-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.results-section{padding:0 0 80px;display:none}
+.results-section.visible{display:block;animation:fadeUp 0.5s ease-out}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.results-header h3{font-size:22px;font-weight:800;letter-spacing:-0.02em}
+.results-header h3 .zip-hl{font-family:var(--font-mono);color:var(--teal);background:var(--teal-glow);padding:2px 10px;border-radius:8px}
+.results-meta{font-size:12px;color:var(--text-muted)}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.results-grid{grid-template-columns:1fr}}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:28px;transition:border-color 0.3s,box-shadow 0.3s}
+.card:hover{border-color:var(--border-hover);box-shadow:0 0 40px rgba(0,212,170,0.04)}
+.card.full{grid-column:1/-1}
+.card-hdr{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.card-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.ico-teal{background:var(--teal-glow)}.ico-red{background:rgba(255,107,107,0.12)}.ico-amber{background:rgba(251,191,36,0.12)}.ico-blue{background:rgba(96,165,250,0.12)}.ico-purple{background:rgba(167,139,250,0.12)}.ico-green{background:rgba(52,211,153,0.12)}
+.card-title{font-size:14px;font-weight:700;color:white}
+.card-sub{font-size:11px;color:var(--text-muted);margin-top:1px}
+.trend-row{margin-bottom:14px}.trend-row:last-child{margin-bottom:0}
+.trend-lbl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.trend-lbl span:first-child{font-size:12px;color:var(--text-secondary)}
+.trend-lbl .pct{font-size:13px;font-weight:700;color:white;font-family:var(--font-mono)}
+.trend-bar{height:6px;background:rgba(255,255,255,0.04);border-radius:100px;overflow:hidden}
+.trend-fill{height:100%;border-radius:100px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1)}
+.fill-teal{background:linear-gradient(90deg,var(--teal),var(--teal-dim))}.fill-amber{background:linear-gradient(90deg,#fbbf24,#fbbf2488)}.fill-blue{background:linear-gradient(90deg,#60a5fa,#60a5fa88)}.fill-purple{background:linear-gradient(90deg,#a78bfa,#a78bfa88)}.fill-green{background:linear-gradient(90deg,#34d399,#34d39988)}
+.sec-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;font-weight:600}.sec-label.mt{margin-top:20px}
+.phrase-card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px;transition:border-color 0.3s}
+.phrase-card:last-child{margin-bottom:0}.phrase-card:hover{border-color:var(--border-hover)}
+.phrase-card .tag{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:3px 10px;border-radius:6px;margin-bottom:10px}
+.tag.opening{background:rgba(96,165,250,0.12);color:#60a5fa}.tag.closing{background:rgba(251,191,36,0.12);color:#fbbf24}.tag.verbiage{background:rgba(52,211,153,0.12);color:#34d399}
+.phrase-card blockquote{font-size:14px;line-height:1.65;color:var(--text-primary);font-style:italic;margin-bottom:10px;padding-left:14px;border-left:2px solid var(--teal)}
+.phrase-card .ctx{font-size:11px;color:var(--text-muted)}
+.approach-box{background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:12px}
+.approach-box:last-child{margin-bottom:0}
+.approach-box h5{font-size:13px;font-weight:700;color:white;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.approach-box p{font-size:12px;color:var(--text-secondary);line-height:1.6}
+.spd{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:3px 10px;border-radius:6px}
+.spd-fast{background:rgba(255,107,107,0.12);color:var(--red)}.spd-slow{background:rgba(96,165,250,0.12);color:#60a5fa}.spd-med{background:rgba(251,191,36,0.12);color:var(--amber)}
+.split-bar{display:flex;height:32px;border-radius:10px;overflow:hidden;margin-bottom:10px}
+.split-bar .seg{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;transition:width 0.6s ease;min-width:40px}
+.split-legend{display:flex;gap:16px;flex-wrap:wrap}
+.split-legend .leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-secondary)}
+.split-legend .leg .dot{width:8px;height:8px;border-radius:3px}
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:640px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+.stat-pill{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;transition:border-color 0.3s}
+.stat-pill:hover{border-color:var(--border-hover)}
+.stat-pill .num{font-size:26px;font-weight:800;color:white;font-family:var(--font-mono);letter-spacing:-0.02em}
+.stat-pill .lbl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.12em;margin-top:4px}
+.ai-box{background:var(--teal-glow);border:1px solid rgba(0,212,170,0.15);border-radius:14px;padding:16px 18px;margin-top:16px}
+.ai-box .ai-lbl{font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.ai-box p{font-size:12px;color:var(--text-secondary);line-height:1.6}
+.spinner-wrap{text-align:center;padding:60px 0;display:none}
+.spinner-wrap.visible{display:block;animation:fadeUp 0.3s ease-out}
+.spinner{width:48px;height:48px;margin:0 auto 20px;border:2px solid rgba(0,212,170,0.15);border-top-color:var(--teal);border-radius:50%;animation:spin 0.8s linear infinite}
+.spinner-wrap p{font-size:13px;color:var(--text-muted)}.spinner-wrap p strong{color:var(--text-secondary)}
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.75);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.visible{display:flex}
+.modal{background:var(--bg-surface);border:1px solid var(--border);border-radius:24px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;animation:modalIn 0.3s ease-out}
+.modal-header{position:sticky;top:0;z-index:5;background:var(--bg-surface);border-bottom:1px solid var(--border);padding:22px 28px;display:flex;align-items:center;justify-content:space-between}
+.modal-header h3{font-size:16px;font-weight:700}.modal-header .sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+.modal-close{background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;transition:color 0.2s;padding:4px 8px}.modal-close:hover{color:white}
+.modal-body{padding:24px 28px}
+.form-row{display:grid;gap:14px;margin-bottom:16px}.form-row.c2{grid-template-columns:1fr 1fr}.form-row.c3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:500px){.form-row.c2,.form-row.c3{grid-template-columns:1fr}}
+.fg label{display:block;font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;font-weight:600}
+.fc{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-family:var(--font-display);font-size:13px;color:white;outline:none;transition:border-color 0.25s}
+.fc:focus{border-color:var(--teal)}.fc::placeholder{color:var(--text-muted)}select.fc{appearance:none;cursor:pointer}textarea.fc{resize:vertical;min-height:80px}.fc option{background:var(--bg-card);color:white}
+.tag-grid{display:flex;flex-wrap:wrap;gap:6px}
+.tag-toggle{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-family:var(--font-display);font-size:11px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.2s}
+.tag-toggle:hover{color:var(--text-secondary);border-color:rgba(255,255,255,0.12)}
+.tag-toggle.sel{background:var(--teal-glow);border-color:rgba(0,212,170,0.3);color:var(--teal)}
+.outcome-grid{display:flex;flex-wrap:wrap;gap:6px}
+.out-btn{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-family:var(--font-display);font-size:11px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.2s}
+.out-btn:hover{border-color:rgba(255,255,255,0.12);color:var(--text-secondary)}
+.out-btn.sel{background:var(--teal-glow);border-color:rgba(0,212,170,0.3);color:var(--teal)}
+.out-btn.sel.hot{background:rgba(255,107,107,0.12);border-color:rgba(255,107,107,0.3);color:var(--red)}
+.modal-footer{position:sticky;bottom:0;background:var(--bg-surface);border-top:1px solid var(--border);padding:18px 28px;display:flex;gap:10px}
+.btn-cancel{flex:1;background:none;border:1px solid var(--border);border-radius:14px;padding:14px;font-family:var(--font-display);font-size:13px;font-weight:500;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}.btn-cancel:hover{background:rgba(255,255,255,0.03)}
+.btn-submit{flex:1;background:var(--teal);border:none;border-radius:14px;padding:14px;font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--bg-deep);cursor:pointer;transition:all 0.2s}.btn-submit:hover{background:#00e4ba}.btn-submit:disabled{opacity:0.5;cursor:not-allowed}
+.admin-ind{position:fixed;bottom:24px;right:24px;z-index:50;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:10px 16px;font-size:11px;color:var(--text-muted);display:none;align-items:center;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.admin-ind.visible{display:flex}.admin-ind .adot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.setup-banner{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:14px;padding:18px 22px;margin-bottom:28px;display:none}
+.setup-banner.visible{display:block}.setup-banner h4{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px}
+.setup-banner p{font-size:12px;color:var(--text-secondary);line-height:1.6}
+.setup-banner code{background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-size:11px;color:var(--amber)}
+.site-footer{border-top:1px solid var(--border);padding:32px 0;text-align:center}
+.site-footer p{font-size:11px;color:var(--text-muted)}.site-footer a{color:var(--teal);text-decoration:none}
+.empty-state{text-align:center;padding:48px 20px}
+.empty-state .icon{font-size:40px;margin-bottom:12px;opacity:0.25}
+.empty-state h4{font-size:15px;font-weight:700;color:var(--text-secondary);margin-bottom:6px}
+.empty-state p{font-size:12px;color:var(--text-muted);max-width:360px;margin:0 auto;line-height:1.6}
+.phrases-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.phrases-grid{grid-template-columns:1fr}}
+/* ── Contributor Mode ── */
+/* ── Platform Stats ── */
+.platform-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:32px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);animation:fadeUp 0.6s ease-out 0.2s both}
+.ps-item{text-align:center}
+.ps-item .ps-num{font-size:22px;font-weight:800;color:white;font-family:var(--font-mono);letter-spacing:-0.02em}
+.ps-item .ps-num .ps-accent{color:var(--teal)}
+.ps-item .ps-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px}
+.ps-zips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px;animation:fadeUp 0.6s ease-out 0.3s both}
+.ps-zip{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--teal);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);border-radius:8px;padding:4px 10px;cursor:pointer;transition:all 0.2s}
+.ps-zip:hover{background:rgba(0,212,170,0.15);border-color:rgba(0,212,170,0.3)}
+.contrib-cta{text-align:center;padding:32px 0 0;animation:fadeUp 0.5s ease-out 0.3s both}
+.contrib-cta-btn{
+  background:linear-gradient(135deg,rgba(0,212,170,0.08),rgba(96,165,250,0.08));
+  border:1px dashed rgba(0,212,170,0.25);border-radius:16px;
+  padding:20px 32px;cursor:pointer;transition:all 0.3s;
+  font-family:var(--font-display);display:inline-block;max-width:480px;
+}
+.contrib-cta-btn:hover{border-style:solid;border-color:rgba(0,212,170,0.4);background:linear-gradient(135deg,rgba(0,212,170,0.12),rgba(96,165,250,0.12));transform:translateY(-1px)}
+.contrib-cta-btn h4{font-size:14px;font-weight:700;color:white;margin-bottom:4px}
+.contrib-cta-btn p{font-size:12px;color:var(--text-secondary);line-height:1.5}
+.contrib-cta-btn .cta-arrow{color:var(--teal);font-size:12px;font-weight:600;margin-top:8px;display:block}
+
+.contrib-overlay{position:fixed;inset:0;z-index:210;background:rgba(0,0,0,0.75);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px}
+.contrib-overlay.visible{display:flex}
+.contrib-panel{background:var(--bg-surface);border:1px solid var(--border);border-radius:24px;width:100%;max-width:460px;animation:modalIn 0.3s ease-out;overflow:hidden}
+.contrib-hero{padding:32px 28px 24px;text-align:center;background:linear-gradient(180deg,rgba(0,212,170,0.06),transparent)}
+.contrib-hero .contrib-icon{font-size:36px;margin-bottom:12px}
+.contrib-hero h3{font-size:18px;font-weight:800;color:white;margin-bottom:6px}
+.contrib-hero p{font-size:12px;color:var(--text-secondary);line-height:1.5;max-width:340px;margin:0 auto}
+.contrib-form{padding:0 28px 24px}
+.contrib-form .fg{margin-bottom:14px}
+.contrib-perks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;padding:0 28px}
+.contrib-perk{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.contrib-perk .perk-icon{font-size:18px;margin-bottom:4px}
+.contrib-perk .perk-text{font-size:10px;color:var(--text-secondary);line-height:1.4}
+.contrib-footer{padding:0 28px 24px;display:flex;gap:10px}
+.contrib-footer .btn-join{flex:1;background:var(--teal);border:none;border-radius:14px;padding:14px;font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--bg-deep);cursor:pointer;transition:all 0.2s}
+.contrib-footer .btn-join:hover{background:#00e4ba}
+.contrib-footer .btn-close{background:none;border:1px solid var(--border);border-radius:14px;padding:14px 20px;font-family:var(--font-display);font-size:13px;color:var(--text-muted);cursor:pointer;transition:all 0.2s}
+.contrib-footer .btn-close:hover{background:rgba(255,255,255,0.03)}
+
+.contrib-badge-nav{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);font-size:11px;color:var(--teal);font-weight:600;margin-right:4px}
+.contrib-badge-nav .cb-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+
+.leaderboard-row{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:border-color 0.2s}
+.leaderboard-row:hover{border-color:var(--border-hover)}
+.leaderboard-row:last-child{margin-bottom:0}
+.lb-rank{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;font-family:var(--font-mono);flex-shrink:0}
+.lb-rank.gold{background:rgba(251,191,36,0.15);color:#fbbf24}
+.lb-rank.silver{background:rgba(192,192,192,0.12);color:#c0c0c0}
+.lb-rank.bronze{background:rgba(205,127,50,0.12);color:#cd7f32}
+.lb-rank.std{background:rgba(255,255,255,0.05);color:var(--text-muted)}
+.lb-info{flex:1;min-width:0}
+.lb-name{font-size:12px;font-weight:600;color:white;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-meta{font-size:10px;color:var(--text-muted)}
+.lb-count{font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--teal)}
+
+/* ── Bulk Processing ── */
+.bulk-progress{margin-top:12px}
+.bulk-progress .bp-bar-wrap{height:6px;background:rgba(255,255,255,0.04);border-radius:100px;overflow:hidden;margin-bottom:8px}
+.bulk-progress .bp-bar{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--teal),var(--teal-dim));transition:width 0.4s ease}
+.bulk-progress .bp-status{font-size:11px;color:var(--t3);text-align:center}
+.bulk-result{background:var(--elevated);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:8px;transition:border-color 0.2s}
+.bulk-result:last-child{margin-bottom:0}
+.bulk-result.success{border-left:3px solid var(--teal)}
+.bulk-result.fail{border-left:3px solid var(--red)}
+.bulk-result .br-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.bulk-result .br-num{font-size:10px;font-weight:700;color:var(--t3);font-family:var(--fm)}
+.bulk-result .br-outcome{font-size:10px;font-weight:600;padding:2px 8px;border-radius:5px}
+.br-outcome.appt{background:rgba(0,212,170,0.12);color:var(--teal)}
+.br-outcome.hot{background:rgba(255,107,107,0.12);color:var(--red)}
+.br-outcome.other{background:rgba(255,255,255,0.05);color:var(--t2)}
+.bulk-result .br-details{font-size:11px;color:var(--t2)}
+.bulk-result .br-phrases{font-size:10px;color:var(--teal);margin-top:4px;font-style:italic}
+.bulk-summary{background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.15);border-radius:12px;padding:14px;margin-top:12px;text-align:center}
+.bulk-summary .bs-big{font-size:24px;font-weight:800;color:var(--teal);font-family:var(--fm)}
+.bulk-summary .bs-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px}
+
+/* ── AI Transcript Analysis ── */
+.ai-preview{background:var(--elevated);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:12px;display:none}
+.ai-preview.visible{display:block;animation:fadeUp 0.3s ease-out}
+.ai-preview .ap-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.ai-preview .ap-row:last-child{border-bottom:none}
+.ai-preview .ap-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:0.08em}
+.ai-preview .ap-value{font-size:12px;color:var(--t1);font-weight:600;text-align:right;max-width:60%}
+.ai-preview .ap-phrases{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.ai-preview .ap-phrases .ap-label{margin-bottom:6px;display:block}
+.ai-preview .ap-phrase-item{font-size:11px;color:var(--teal);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.15);border-radius:8px;padding:6px 10px;margin-bottom:4px;font-style:italic}
+.ai-analyzing{text-align:center;padding:24px}
+.ai-analyzing .typing-dots{display:inline-flex;gap:4px;margin-bottom:8px}
+.ai-analyzing .typing-dots span{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:dotBounce 1.4s infinite}
+.ai-analyzing .typing-dots span:nth-child(2){animation-delay:0.2s}
+.ai-analyzing .typing-dots span:nth-child(3){animation-delay:0.4s}
+.ai-analyzing p{font-size:11px;color:var(--t3)}
+.qs-transcript{width:100%;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;font-family:var(--fd);font-size:12px;color:white;outline:none;resize:vertical;min-height:120px;transition:border-color 0.2s;line-height:1.6}
+.qs-transcript:focus{border-color:var(--teal)}
+.qs-transcript::placeholder{color:var(--t3)}
+
+/* ── Quick Submit ── */
+.qs-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);display:none;align-items:flex-end;justify-content:center;padding:0}
+.qs-overlay.visible{display:flex}
+@media(min-width:640px){.qs-overlay{align-items:center;padding:20px}}
+.qs-panel{background:var(--bg-surface);border:1px solid var(--border);border-radius:24px 24px 0 0;width:100%;max-width:520px;max-height:85vh;overflow-y:auto;animation:qsSlide 0.3s ease-out}
+@media(min-width:640px){.qs-panel{border-radius:24px;animation:modalIn 0.3s ease-out}}
+@keyframes qsSlide{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.qs-header{position:sticky;top:0;z-index:5;background:var(--bg-surface);border-bottom:1px solid var(--border);padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+.qs-header h3{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.qs-header h3 .qs-badge{font-size:10px;font-weight:600;background:var(--teal-glow);color:var(--teal);padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:0.08em}
+.qs-header .qs-counter{font-size:11px;color:var(--text-muted);font-family:var(--font-mono)}
+.qs-body{padding:20px 24px}
+.qs-zip-bar{display:flex;gap:8px;margin-bottom:16px;align-items:center}
+.qs-zip-bar input{flex:1;max-width:120px}
+.qs-zip-bar .qs-zip-lock{font-size:11px;color:var(--teal);display:flex;align-items:center;gap:4px}
+.qs-section{margin-bottom:14px}
+.qs-section label{display:block;font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;font-weight:600}
+.qs-tags{display:flex;flex-wrap:wrap;gap:5px}
+.qs-tag{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-family:var(--font-display);font-size:11px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.15s}
+.qs-tag:hover{border-color:rgba(255,255,255,0.12);color:var(--text-secondary)}
+.qs-tag.sel{background:var(--teal-glow);border-color:rgba(0,212,170,0.3);color:var(--teal)}
+.qs-tag.sel.hot{background:rgba(255,107,107,0.12);border-color:rgba(255,107,107,0.3);color:var(--red)}
+.qs-phrases{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-family:var(--font-display);font-size:12px;color:white;outline:none;resize:vertical;min-height:60px;transition:border-color 0.2s}
+.qs-phrases:focus{border-color:var(--teal)}
+.qs-phrases::placeholder{color:var(--text-muted)}
+.qs-footer{position:sticky;bottom:0;background:var(--bg-surface);border-top:1px solid var(--border);padding:14px 24px;display:flex;gap:8px}
+.qs-footer .qs-submit{flex:1;background:var(--teal);border:none;border-radius:12px;padding:12px;font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--bg-deep);cursor:pointer;transition:all 0.2s}
+.qs-footer .qs-submit:hover{background:#00e4ba}
+.qs-footer .qs-submit:disabled{opacity:0.5;cursor:not-allowed}
+.qs-footer .qs-full{background:none;border:1px solid var(--border);border-radius:12px;padding:12px 16px;font-family:var(--font-display);font-size:11px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.qs-footer .qs-full:hover{background:rgba(255,255,255,0.03);color:var(--text-secondary)}
+.qs-success{text-align:center;padding:20px;animation:fadeUp 0.3s ease-out}
+.qs-success .check{font-size:32px;margin-bottom:8px}
+.qs-success p{font-size:13px;color:var(--teal);font-weight:600}
+.qs-success .qs-again{margin-top:12px;background:var(--teal-glow);border:1px solid rgba(0,212,170,0.2);border-radius:10px;padding:8px 20px;font-family:var(--font-display);font-size:12px;font-weight:600;color:var(--teal);cursor:pointer;transition:all 0.2s}
+.qs-success .qs-again:hover{background:rgba(0,212,170,0.2)}
+.nav-btn.quick{background:rgba(0,212,170,0.1);color:var(--teal);border:1px solid rgba(0,212,170,0.2)}
+.nav-btn.quick:hover{background:rgba(0,212,170,0.2)}
+
+/* ── AI Augment Button ── */
+.ai-augment-wrap{text-align:center;margin-top:28px;display:none}
+.ai-augment-wrap.visible{display:block;animation:fadeUp 0.4s ease-out}
+.ai-augment-btn{
+  background:linear-gradient(135deg,rgba(167,139,250,0.15),rgba(0,212,170,0.15));
+  border:1px solid rgba(167,139,250,0.3);border-radius:16px;
+  padding:16px 32px;cursor:pointer;transition:all 0.3s;
+  font-family:var(--font-display);font-size:14px;font-weight:700;color:#a78bfa;
+  display:inline-flex;align-items:center;gap:10px;
+  position:relative;overflow:hidden;
+}
+.ai-augment-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(167,139,250,0.08),rgba(0,212,170,0.08));opacity:0;transition:opacity 0.3s}
+.ai-augment-btn:hover{border-color:rgba(167,139,250,0.5);transform:translateY(-2px);box-shadow:0 8px 32px rgba(167,139,250,0.15)}
+.ai-augment-btn:hover::before{opacity:1}
+.ai-augment-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none}
+.ai-augment-btn .sparkle{font-size:18px;position:relative;z-index:1}
+.ai-augment-btn span{position:relative;z-index:1}
+.ai-augment-btn .sub-text{font-size:10px;font-weight:500;color:rgba(167,139,250,0.6);display:block;margin-top:2px;letter-spacing:0.04em}
+
+/* ── AI Research Output ── */
+.ai-research-card{display:none;margin-top:20px}
+.ai-research-card.visible{display:block;animation:fadeUp 0.5s ease-out}
+.ai-research-card .card{border-color:rgba(167,139,250,0.2);background:linear-gradient(180deg,var(--bg-card),rgba(15,21,32,0.95))}
+.ai-research-card .card:hover{border-color:rgba(167,139,250,0.4)}
+.research-section{margin-bottom:24px}
+.research-section:last-child{margin-bottom:0}
+.research-section h4{font-size:14px;font-weight:700;color:white;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.research-section h4 .r-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.research-section .r-content{font-size:13px;color:var(--text-secondary);line-height:1.7}
+.research-section .r-content strong{color:var(--text-primary)}
+.r-phrase{background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.r-phrase:last-child{margin-bottom:0}
+.r-phrase .r-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;border-radius:5px;margin-bottom:8px;background:rgba(167,139,250,0.12);color:#a78bfa}
+.r-phrase blockquote{font-size:13px;line-height:1.6;color:var(--text-primary);font-style:italic;padding-left:12px;border-left:2px solid #a78bfa;margin-bottom:6px}
+.r-phrase .r-why{font-size:11px;color:var(--text-muted)}
+.research-divider{height:1px;background:var(--border);margin:20px 0}
+.ai-loading-research{text-align:center;padding:40px 20px}
+.ai-loading-research .typing-dots{display:inline-flex;gap:4px;margin-bottom:12px}
+.ai-loading-research .typing-dots span{width:8px;height:8px;border-radius:50%;background:#a78bfa;animation:dotBounce 1.4s infinite}
+.ai-loading-research .typing-dots span:nth-child(2){animation-delay:0.2s}
+.ai-loading-research .typing-dots span:nth-child(3){animation-delay:0.4s}
+.ai-loading-research p{font-size:12px;color:var(--text-muted)}
+@keyframes dotBounce{0%,80%,100%{opacity:0.3;transform:scale(0.8)}40%{opacity:1;transform:scale(1.2)}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes modalIn{from{opacity:0;transform:scale(0.96) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="container header-inner"><div class="logo-group"><div class="logo-mark">LP</div><div class="logo-text"><h1>LeadPulse Consultancy</h1><span>Cold Call Intelligence for Listing Agents</span></div></div><div class="nav-links"><span id="contribBadgeNav" style="display:none"></span><button class="nav-btn active" onclick="showView('search',this)">Search</button><a href="dashboard.html" class="nav-btn" id="dashNavBtn" style="display:none">📊 Dashboard</a><button class="nav-btn" onclick="openContribSignup()" id="contribNavBtn">Contribute</button><button class="nav-btn quick" onclick="openQuickSubmit()" id="qsNavBtn" style="display:none">🎙 Log Call</button><button class="nav-btn primary" onclick="openModal()" id="submitNavBtn" style="display:none">+ Full Submit</button></div></div></header>
+<!-- Quick Submit Panel -->
+<div class="qs-overlay" id="qsOverlay">
+  <div class="qs-panel" style="max-width:580px">
+    <div class="qs-header">
+      <h3>🎙 Log Call <span class="qs-badge">AI-Powered</span></h3>
+      <div><span class="qs-counter" id="qsCounter">0 logged this session</span>&nbsp;&nbsp;<button class="modal-close" onclick="closeQS()">&times;</button></div>
+    </div>
+    <div style="display:flex;border-bottom:1px solid var(--border)">
+      <button class="tab active" id="qsTabAI" onclick="switchQSTab('ai')" style="flex:1;border-radius:0;font-size:12px;padding:10px">🤖 Single</button>
+      <button class="tab" id="qsTabBulk" onclick="switchQSTab('bulk')" style="flex:1;border-radius:0;font-size:12px;padding:10px">📋 Bulk Paste</button>
+      <button class="tab" id="qsTabManual" onclick="switchQSTab('manual')" style="flex:1;border-radius:0;font-size:12px;padding:10px">✏️ Manual</button>
+    </div>
+    <div class="qs-body" id="qsBody"></div>
+    <div class="qs-footer" id="qsFooter">
+      <button class="qs-full" onclick="closeQS();openModal()">Full Form →</button>
+      <button class="qs-submit" id="qsSubmitBtn">Analyze & Log 🤖</button>
+    </div>
+  </div>
+</div>
+<section class="hero container" id="heroSection"><div class="hero-badge"><span class="dot"></span> Cold Call Intelligence for Appointment Setters</div><h2>Know What Works<br>Before You <span class="teal">Dial</span></h2><p>Search any ZIP code to see seller motivation trends, proven scripts, and the exact phrases that set appointments — built by appointment setters, for appointment setters working with listing agents.</p><div class="search-box"><input type="text" class="search-input" id="zipInput" placeholder="Enter ZIP code..." maxlength="5" onkeydown="if(event.key==='Enter')searchZip()"><button class="search-btn" id="searchBtn" onclick="searchZip()">Analyze</button></div>
+<div id="platformStats"></div>
+<div class="contrib-cta" id="contribCta"><div class="contrib-cta-btn" onclick="openContribSignup()"><h4>🤝 Are you an appointment setter?</h4><p>Contribute your call data and unlock AI-powered trend analysis, winning scripts, and market research for every ZIP code you work — built for setters working with listing agents.</p><span class="cta-arrow">Join as Contributor →</span></div></div>
+</section>
+
+<!-- Contributor Signup -->
+<div class="contrib-overlay" id="contribOverlay">
+  <div class="contrib-panel">
+    <div class="contrib-hero">
+      <div class="contrib-icon">🤝</div>
+      <h3>Join as Contributor</h3>
+      <p>Contribute your cold call data. Get AI-powered trends, scripts, and market research for every ZIP you work — built for appointment setters working with listing agents.</p>
+    </div>
+    <div class="contrib-perks">
+      <div class="contrib-perk"><div class="perk-icon">📊</div><div class="perk-text">ZIP code trends & motivation breakdowns</div></div>
+      <div class="contrib-perk"><div class="perk-icon">💬</div><div class="perk-text">Community winning phrases ranked by success</div></div>
+      <div class="contrib-perk"><div class="perk-icon">✦</div><div class="perk-text">AI market research & anti-cash-buyer scripts</div></div>
+      <div class="contrib-perk"><div class="perk-icon">⚡</div><div class="perk-text">Quick Log for rapid post-shift data entry</div></div>
+    </div>
+    <div class="contrib-form">
+      <div class="fg"><label>Your Alias / Call Name</label><input type="text" class="fc" id="contribAlias" placeholder="e.g. Sam, CloserSam, SamDFW"></div>
+      <div class="fg"><label>Your Market / City</label><input type="text" class="fc" id="contribMarket" placeholder="e.g. Dallas-Fort Worth, Houston, Phoenix"></div>
+      <div class="fg"><label>Role</label><select class="fc" id="contribRole"><option>Appointment Setter</option><option>Cold Caller (Wholesaling)</option><option>ISA (Inside Sales Agent)</option><option>Listing Agent</option><option>Investor / Buyer Agent</option><option>Team Lead / Manager</option></select></div>
+      <div class="fg"><label>Experience Level</label><select class="fc" id="contribExp"><option>New (under 6 months)</option><option>Intermediate (6-18 months)</option><option>Experienced (18+ months)</option><option>Veteran (3+ years)</option></select></div>
+    </div>
+    <div class="contrib-footer">
+      <button class="btn-close" onclick="closeContribSignup()">Cancel</button>
+      <button class="btn-join" onclick="joinAsContributor()">Start Contributing</button>
+    </div>
+  </div>
+</div>
+<div class="container"><div class="spinner-wrap" id="loadingSpinner"><div class="spinner"></div><p>Analyzing 2026 call data for <strong id="loadingZip"></strong>...</p></div></div>
+<section class="container results-section" id="resultsSection"><div class="stats-row" id="statsRow"></div><div class="results-header"><h3>Insights for <span class="zip-hl" id="resultZip"></span></h3><span class="results-meta" id="resultsMeta"></span></div><div class="results-grid" id="resultsGrid"></div>
+  <div class="ai-augment-wrap" id="aiAugmentWrap">
+    <button class="ai-augment-btn" id="aiAugmentBtn" onclick="runAiAugment()">
+      <span class="sparkle">✦</span>
+      <span>AI Augment — Market Research<span class="sub-text">Anti-cash-buyer verbiage · Realtor-favorable market data · 6-month trends</span></span>
+    </button>
+  </div>
+  <div class="ai-research-card" id="aiResearchCard">
+    <div class="card full" id="aiResearchContent"></div>
+  </div></section>
+<div class="modal-overlay" id="submitModal"><div class="modal"><div class="modal-header"><div><h3>Submit Call Recording</h3><div class="sub">Add 2026 call data for AI trend analysis</div></div><button class="modal-close" onclick="closeModal()">&times;</button></div><div class="modal-body" id="modalBody"></div><div class="modal-footer"><button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-submit" id="submitBtn" onclick="submitCall()">Submit Call</button></div></div></div>
+<div class="container" style="margin-top:24px"><div class="setup-banner" id="setupBanner"><h4>⚙ Database Setup Required</h4><p>Running in <strong>demo mode</strong> with sample DFW data. To go live, set <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> in CONFIG. See README.</p></div></div>
+<div class="admin-ind" id="adminInd"><span class="adot"></span><span>Admin Mode</span></div>
+<footer class="site-footer"><div class="container"><p>&copy; 2026 <a href="https://leadpulseconsultancy.com">LeadPulse Consultancy</a> · Cold call intelligence for appointment setters working with listing agents.</p></div></footer>
+
+<script>
+const CONFIG={SUPABASE_URL:'https://wevgliayhioturfuylkz.supabase.co',SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndldmdsaWF5aGlvdHVyZnV5bGt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxNTExODgsImV4cCI6MjA4OTcyNzE4OH0.06M2kbwIvX7D6EfAmIzsjH1zFFcYJlCPtSMUbjKc4n4',GEMINI_ENDPOINT:'/.netlify/functions/gemini',ADMIN_AUTH_ENDPOINT:'/.netlify/functions/admin-auth'};
+let sbClient=null,isAdmin=false,demoMode=true,selMotivations=[],selOutcome='No Answer',selOccupancy='Vacant';
+let qsSessionCount=0,qsMotivations=[],qsOutcome='Appointment Set',qsOccupancy='Vacant',qsApptFormat='Phone Appointment',qsZip='',qsAgent='';
+let contributor=null; // {alias, market, role, exp, joinedAt, callCount}
+const MOTIVATIONS=['Pre-Foreclosure','Tax Delinquent','Absentee Owner','Inherited Property','Vacant Property','Senior Owner','Expired Listing','Divorce','Code Violation','Probate','Downsizing','Relocation','Financial Hardship','Tired Landlord'];
+const OUTCOMES=['No Answer','Voicemail','Not Interested','Callback Requested','Appointment Set','Hot Lead'];
+const OCCUPANCY_OPTS=['Vacant','Tenant Occupied','Owner Occupied'];
+const APPT_FORMATS=['Phone Appointment','In-Person Appointment','Virtual Walkthrough','No Appointment'];
+const TIMELINES=['ASAP (under 2 weeks)','1-3 months','3-6 months','6+ months / Flexible','Not specified'];
+const US_STATES=['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+
+const DEMO_CALLS=[
+{zip:'75216',city:'Dallas',state:'TX',motivations:['Pre-Foreclosure','Financial Hardship'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',property_type:'Single Family',asking_price:'$145,000',occupancy:'Owner Occupied',appt_format:'In-Person Appointment',notes:'Seller behind 3 months. Opened empathetic, she said "finally someone who gets it." Set in-person for Thursday.',seller_name:'Maria Garcia',date:'2026-01-15',duration:14,successful_phrases:['I understand this is a difficult situation','you have options you might not be aware of','No obligation just so I can give you an accurate number']},
+{zip:'75216',city:'Dallas',state:'TX',motivations:['Pre-Foreclosure'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',property_type:'Single Family',asking_price:'$128,000',occupancy:'Owner Occupied',appt_format:'Phone Appointment',notes:'Hesitant at first, warmed up after low-pressure opener. Agreed to phone call with numbers.',seller_name:'Marcus Johnson',date:'2026-01-22',duration:11,successful_phrases:['I am not here to pressure you','I just wanted to see if you are exploring your options','Would it help if I just ran some numbers']},
+{zip:'75216',city:'Dallas',state:'TX',motivations:['Tax Delinquent','Vacant Property'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',property_type:'Single Family',asking_price:'$98,000',occupancy:'Vacant',appt_format:'In-Person Appointment',notes:'Vacant 2 years, $12k back taxes. Went direct with speed pitch. Seller relieved.',seller_name:'Robert Williams',date:'2026-02-03',duration:11,successful_phrases:['I work with investors who can close in as little as 10 days','they handle all the paperwork','We can have an offer ready the same day']},
+{zip:'75216',city:'Dallas',state:'TX',motivations:['Inherited Property','Probate'],outcome:'Hot Lead',timeline:'1-3 months',property_type:'Single Family',asking_price:'$175,000',occupancy:'Vacant',appt_format:'Phone Appointment',notes:'Inherited from father, in probate. Went slow, acknowledged loss. She opened up about feeling overwhelmed.',seller_name:'Angela Mitchell',date:'2026-02-10',duration:18,successful_phrases:['I am sorry for your loss','there is absolutely no rush','Can I call you next week just to check in']},
+{zip:'75216',city:'Dallas',state:'TX',motivations:['Divorce'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',property_type:'Single Family',asking_price:'$210,000',occupancy:'Owner Occupied',appt_format:'In-Person Appointment',notes:'Divorce, both want fast sale. Direct approach worked. Set in-person with written offer promise.',seller_name:'Jennifer & Mark Adams',date:'2026-02-18',duration:9,successful_phrases:['I can help make this one less thing to worry about','I specialize in quick clean closings','have a written offer within 24 hours']},
+{zip:'75216',city:'Dallas',state:'TX',motivations:['Tired Landlord'],outcome:'Not Interested',timeline:'Not specified',property_type:'Multi-Family',asking_price:'$320,000',occupancy:'Tenant Occupied',appt_format:'No Appointment',notes:'4-unit, tenant issues. Not ready. Planted seed for follow-up.',seller_name:'Carlos Reyes',date:'2026-02-25',duration:6,successful_phrases:[]},
+{zip:'75216',city:'Dallas',state:'TX',motivations:['Tired Landlord','Absentee Owner'],outcome:'Appointment Set',timeline:'1-3 months',property_type:'Single Family',asking_price:'$155,000',occupancy:'Tenant Occupied',appt_format:'Phone Appointment',notes:'Absentee landlord, tenant not paying 4 months. Acknowledged pain, he said "you have no idea."',seller_name:'Derek Patterson',date:'2026-03-05',duration:13,successful_phrases:['dealing with problem tenants from a distance is exhausting','get out from under that stress','If the numbers make sense we can talk about next steps']},
+{zip:'75216',city:'Dallas',state:'TX',motivations:['Pre-Foreclosure'],outcome:'Callback Requested',timeline:'1-3 months',property_type:'Single Family',asking_price:'$162,000',occupancy:'Owner Occupied',appt_format:'No Appointment',notes:'Initial resistance, turned around with low-pressure approach. Will call back.',seller_name:'David Thompson',date:'2026-03-10',duration:8,successful_phrases:['No pressure at all','I just wanted to reach out in case you were exploring options']},
+{zip:'75217',city:'Dallas',state:'TX',motivations:['Tax Delinquent'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',property_type:'Single Family',asking_price:'$110,000',occupancy:'Vacant',appt_format:'In-Person Appointment',notes:'$8k back taxes, tax sale in 60 days. Speed pitch.',seller_name:'Linda Chen',date:'2026-01-28',duration:10,successful_phrases:['I understand there is a deadline approaching','we can close in 10 to 14 days','The sooner we move the more options you have']},
+{zip:'75217',city:'Dallas',state:'TX',motivations:['Absentee Owner','Vacant Property'],outcome:'Callback Requested',timeline:'3-6 months',property_type:'Single Family',asking_price:'$135,000',occupancy:'Vacant',appt_format:'No Appointment',notes:'Lives in California, property empty 3 years. Planted seed about cost of vacancy.',seller_name:'Thomas Wright',date:'2026-02-14',duration:7,successful_phrases:['what it could be doing for you instead of costing you']},
+{zip:'75217',city:'Dallas',state:'TX',motivations:['Financial Hardship'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',property_type:'Single Family',asking_price:'$92,000',occupancy:'Owner Occupied',appt_format:'Phone Appointment',notes:'Lost job, falling behind. No-judgment opener worked perfectly.',seller_name:'Anthony Brooks',date:'2026-03-01',duration:12,successful_phrases:['There is no judgment here just options','Let me put together a few scenarios for you']},
+{zip:'75217',city:'Dallas',state:'TX',motivations:['Tired Landlord'],outcome:'Appointment Set',timeline:'1-3 months',property_type:'Multi-Family',asking_price:'$245,000',occupancy:'Tenant Occupied',appt_format:'Phone Appointment',notes:'Duplex, one tenant trashing place. Pain-point approach.',seller_name:'Raymond Ortiz',date:'2026-03-12',duration:9,successful_phrases:['done dealing with tenant headaches','What if I could get you a fair cash offer so you can move on']},
+{zip:'75228',city:'Dallas',state:'TX',motivations:['Inherited Property'],outcome:'Hot Lead',timeline:'1-3 months',property_type:'Single Family',asking_price:'$195,000',occupancy:'Vacant',appt_format:'Phone Appointment',notes:'Mother passed. Very emotional. Went slow and personal.',seller_name:'Robert Johnson',date:'2026-01-20',duration:22,successful_phrases:['I am so sorry for your loss','I can help make this process as easy as possible','There is no timeline']},
+{zip:'75228',city:'Dallas',state:'TX',motivations:['Senior Owner','Downsizing'],outcome:'Appointment Set',timeline:'3-6 months',property_type:'Single Family',asking_price:'$240,000',occupancy:'Owner Occupied',appt_format:'In-Person Appointment',notes:'Elderly couple, assisted living. Patient, respectful approach.',seller_name:'Harold & Betty Foster',date:'2026-02-08',duration:15,successful_phrases:['There is no timeline pressure','I just want to make sure you get the best outcome','I would love to see the home and give you an honest assessment']},
+{zip:'75228',city:'Dallas',state:'TX',motivations:['Absentee Owner','Vacant Property'],outcome:'Appointment Set',timeline:'1-3 months',property_type:'Single Family',asking_price:'$168,000',occupancy:'Vacant',appt_format:'Phone Appointment',notes:'Owner in Houston, vacant since 2024. Cost-of-vacancy framing.',seller_name:'Natasha Simmons',date:'2026-02-22',duration:10,successful_phrases:['Every month that property sits empty it is costing you money','What if we could turn that into cash in your pocket']},
+{zip:'75228',city:'Dallas',state:'TX',motivations:['Probate'],outcome:'Callback Requested',timeline:'3-6 months',property_type:'Single Family',asking_price:'$185,000',occupancy:'Vacant',appt_format:'No Appointment',notes:'Estate in probate, executor overwhelmed. Offered to walk through process.',seller_name:'Denise Walker',date:'2026-03-08',duration:8,successful_phrases:['I have helped families sell properties during probate many times','I can walk you through the whole process']},
+{zip:'75203',city:'Dallas',state:'TX',motivations:['Expired Listing'],outcome:'Appointment Set',timeline:'1-3 months',property_type:'Condo/Townhome',asking_price:'$280,000',occupancy:'Owner Occupied',appt_format:'Phone Appointment',notes:'Expired after 90 days, frustrated with old agent. Fresh-eyes angle.',seller_name:'Patricia Moore',date:'2026-02-05',duration:13,successful_phrases:['a fresh set of eyes and a different approach','I would love to show you what I think went wrong and how we can fix it']},
+{zip:'75203',city:'Dallas',state:'TX',motivations:['Relocation'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',property_type:'Single Family',asking_price:'$310,000',occupancy:'Owner Occupied',appt_format:'In-Person Appointment',notes:'Job transfer in 3 weeks. Speed specialist pitch.',seller_name:'Kevin Park',date:'2026-02-19',duration:11,successful_phrases:['I specialize in fast closings','Let me show you how we can make this happen before your move date','We will have an offer within 48 hours']},
+{zip:'75203',city:'Dallas',state:'TX',motivations:['Downsizing'],outcome:'Appointment Set',timeline:'3-6 months',property_type:'Single Family',asking_price:'$375,000',occupancy:'Owner Occupied',appt_format:'Phone Appointment',notes:'Empty nesters. Slow, consultative approach.',seller_name:'George & Ellen Price',date:'2026-03-04',duration:16,successful_phrases:['A lot of families at this stage want to simplify','I can help you understand exactly what your home is worth']},
+{zip:'75241',city:'Dallas',state:'TX',motivations:['Financial Hardship','Pre-Foreclosure'],outcome:'Not Interested',timeline:'Not specified',property_type:'Single Family',asking_price:'$125,000',occupancy:'Owner Occupied',appt_format:'No Appointment',notes:'Very defensive. Planted seed.',seller_name:'James Wilson',date:'2026-02-12',duration:4,successful_phrases:[]},
+{zip:'75241',city:'Dallas',state:'TX',motivations:['Code Violation'],outcome:'Appointment Set',timeline:'3-6 months',property_type:'Single Family',asking_price:'$95,000',occupancy:'Tenant Occupied',appt_format:'Phone Appointment',notes:'Code violations, tenant in place, overwhelmed by costs. As-is pitch.',seller_name:'Diane Ross',date:'2026-02-28',duration:9,successful_phrases:['You do not have to fix anything','Investors buy properties as-is all the time','What if I could get you an offer that takes all of that off your plate']},
+{zip:'75241',city:'Dallas',state:'TX',motivations:['Vacant Property','Absentee Owner'],outcome:'Appointment Set',timeline:'1-3 months',property_type:'Single Family',asking_price:'$108,000',occupancy:'Vacant',appt_format:'In-Person Appointment',notes:'Vacant, owner in Plano. Cost-of-vacancy framing got commitment.',seller_name:'William Torres',date:'2026-03-15',duration:8,successful_phrases:['That property is not making you money sitting empty','Let me take that burden off you']},
+];
+// Tag demo data with sample contributors
+const demoContributors=['Ken_DFW','Ken_DFW','Ken_DFW','Ken_DFW','Ken_DFW','Ken_DFW','Ken_DFW','Ken_DFW','CloserMike','CloserMike','CloserMike','CloserMike','SarahSets','SarahSets','SarahSets','SarahSets','RealJay','RealJay','RealJay','APTKing','APTKing','APTKing'];
+DEMO_CALLS.forEach((c,i)=>{c.contributor=demoContributors[i%demoContributors.length]});
+
+function revealAdminUI(){isAdmin=true;document.getElementById('submitNavBtn').style.display='';document.getElementById('qsNavBtn').style.display='';document.getElementById('dashNavBtn').style.display='';document.getElementById('adminInd').classList.add('visible')}
+
+async function checkAdminAccess(candidatePassword){
+  // The password is verified server-side in admin-auth.js against
+  // process.env.ADMIN_KEY — it is never compared or stored in client code.
+  try{
+    const res=await fetch(CONFIG.ADMIN_AUTH_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:candidatePassword})});
+    if(!res.ok)return false;
+    const data=await res.json();
+    return !!data.ok;
+  }catch(e){console.warn(e);return false}
+}
+
+document.addEventListener('DOMContentLoaded',async()=>{
+const params=new URLSearchParams(window.location.search);
+if(sessionStorage.getItem('lp_admin_ok')==='1'){
+  revealAdminUI();
+}else{
+  const candidate=params.get('admin');
+  if(candidate){
+    const ok=await checkAdminAccess(candidate);
+    if(ok){sessionStorage.setItem('lp_admin_ok','1');revealAdminUI()}
+  }
+}
+if(CONFIG.SUPABASE_URL&&CONFIG.SUPABASE_ANON_KEY){try{sbClient=window.supabase.createClient(CONFIG.SUPABASE_URL,CONFIG.SUPABASE_ANON_KEY);demoMode=false}catch(e){console.warn(e)}}
+if(demoMode)document.getElementById('setupBanner').classList.add('visible');
+// Restore contributor
+try{const c=localStorage.getItem('lp_contributor');if(c){contributor=JSON.parse(c);activateContributor()}}catch(e){}
+buildForm();
+loadPlatformStats();
+const z=params.get('zip');if(z&&/^\d{5}$/.test(z)){document.getElementById('zipInput').value=z;searchZip()}
+});
+
+function buildForm(){
+const b=document.getElementById('modalBody');
+b.innerHTML=`
+<div class="form-row c3"><div class="fg"><label>Call Date</label><input type="date" class="fc" id="fDate" value="${new Date().toISOString().split('T')[0]}"></div><div class="fg"><label>Call Time</label><input type="time" class="fc" id="fTime" value="10:00"></div><div class="fg"><label>Duration (min)</label><input type="number" class="fc" id="fDuration" placeholder="12"></div></div>
+<div class="form-row"><div class="fg"><label>Seller Name</label><input type="text" class="fc" id="fSellerName" placeholder="John & Jane Doe"></div></div>
+<div class="form-row"><div class="fg"><label>Property Address</label><input type="text" class="fc" id="fAddress" placeholder="1234 Main St"></div></div>
+<div class="form-row c3"><div class="fg"><label>City</label><input type="text" class="fc" id="fCity" placeholder="Dallas"></div><div class="fg"><label>State</label><select class="fc" id="fState">${US_STATES.map(s=>`<option${s==='TX'?' selected':''}>${s}</option>`).join('')}</select></div><div class="fg"><label>ZIP Code</label><input type="text" class="fc" id="fZip" placeholder="75216" maxlength="5"></div></div>
+<div class="form-row c2"><div class="fg"><label>Property Type</label><select class="fc" id="fPropType"><option>Single Family</option><option>Multi-Family</option><option>Condo/Townhome</option><option>Mobile Home</option><option>Land/Lot</option><option>Commercial</option></select></div><div class="fg"><label>Occupancy Status</label><div class="tag-grid" id="occGrid"></div></div></div>
+<div class="form-row c2"><div class="fg"><label>Asking Price</label><input type="text" class="fc" id="fPrice" placeholder="$185,000"></div><div class="fg"><label>Seller Timeline</label><select class="fc" id="fTimeline">${TIMELINES.map(t=>`<option>${t}</option>`).join('')}</select></div></div>
+<div class="fg" style="margin-bottom:16px"><label>Appointment Format (if set)</label><div class="tag-grid" id="afGrid"></div></div>
+<div class="fg" style="margin-bottom:16px"><label>Call Outcome</label><div class="outcome-grid" id="outcomeGrid"></div></div>
+<div class="fg" style="margin-bottom:16px"><label>Seller Motivation (select all)</label><div class="tag-grid" id="motivationGrid"></div></div>
+<div class="form-row"><div class="fg"><label>Property Condition / Upgrades</label><textarea class="fc" id="fUpgrades" placeholder="New roof 2022, needs HVAC..."></textarea></div></div>
+<div class="form-row"><div class="fg"><label>Call Notes — What happened on the call?</label><textarea class="fc" id="fNotes" rows="4" placeholder="Describe the call. What worked? What didn't?"></textarea></div></div>
+<div class="form-row"><div class="fg"><label>Successful Phrases — Exact words that got the appointment (one per line)</label><textarea class="fc" id="fPhrases" rows="3" placeholder="I understand this is a difficult situation&#10;You have options you might not be aware of&#10;Can I come by Thursday?"></textarea></div></div>`;
+const oG=document.getElementById('occGrid');OCCUPANCY_OPTS.forEach(o=>{const b=document.createElement('button');b.className='tag-toggle'+(o==='Vacant'?' sel':'');b.textContent=o;b.type='button';b.onclick=()=>{oG.querySelectorAll('.tag-toggle').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');selOccupancy=o};oG.appendChild(b)});
+const aG=document.getElementById('afGrid');APPT_FORMATS.forEach(f=>{const b=document.createElement('button');b.className='tag-toggle'+(f==='No Appointment'?' sel':'');b.textContent=f;b.type='button';b.onclick=()=>{aG.querySelectorAll('.tag-toggle').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')};aG.appendChild(b)});
+const outG=document.getElementById('outcomeGrid');OUTCOMES.forEach(o=>{const b=document.createElement('button');b.className='out-btn'+(o==='No Answer'?' sel':'');b.textContent=o;b.type='button';b.onclick=()=>{selOutcome=o;outG.querySelectorAll('.out-btn').forEach(x=>{x.classList.remove('sel','hot');if(x.textContent===o){x.classList.add('sel');if(o==='Hot Lead')x.classList.add('hot')}})};outG.appendChild(b)});
+const mG=document.getElementById('motivationGrid');MOTIVATIONS.forEach(m=>{const b=document.createElement('button');b.className='tag-toggle';b.textContent=m;b.type='button';b.onclick=()=>{if(selMotivations.includes(m)){selMotivations=selMotivations.filter(x=>x!==m);b.classList.remove('sel')}else{selMotivations.push(m);b.classList.add('sel')}};mG.appendChild(b)});
+}
+
+function showView(v,el){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));if(v==='search'){document.getElementById('heroSection').style.display='';if(el)el.classList.add('active')}}
+function openModal(){document.getElementById('submitModal').classList.add('visible')}
+function closeModal(){document.getElementById('submitModal').classList.remove('visible')}
+
+async function searchZip(){
+const zip=document.getElementById('zipInput').value.trim();
+if(!/^\d{5}$/.test(zip)){alert('Enter a valid 5-digit ZIP.');return}
+document.getElementById('resultsSection').classList.remove('visible');
+document.getElementById('loadingSpinner').classList.add('visible');
+document.getElementById('loadingZip').textContent=zip;
+document.getElementById('searchBtn').disabled=true;
+const url=new URL(window.location);url.searchParams.set('zip',zip);window.history.replaceState({},'',url);
+let calls=[];
+if(demoMode){await new Promise(r=>setTimeout(r,1500));calls=DEMO_CALLS.filter(c=>c.zip===zip)}
+else{try{const{data,error}=await sbClient.from('calls').select('*').eq('zip',zip);if(error)throw error;calls=data||[]}catch(e){calls=DEMO_CALLS.filter(c=>c.zip===zip)}}
+document.getElementById('loadingSpinner').classList.remove('visible');
+document.getElementById('searchBtn').disabled=false;
+if(!calls.length){showEmpty(zip);return}
+renderResults(zip,calls);
+}
+
+function showEmpty(zip){
+const s=document.getElementById('resultsSection');document.getElementById('resultZip').textContent=zip;document.getElementById('resultsMeta').textContent='';document.getElementById('statsRow').innerHTML='';
+document.getElementById('resultsGrid').innerHTML=`<div class="card full"><div class="empty-state"><div class="icon">📭</div><h4>No 2026 Data for ZIP ${zip}</h4><p>No call recordings for this area yet. Submit calls to build trends.</p></div></div>`;
+s.classList.add('visible');
+}
+
+function renderResults(zip,calls){
+const section=document.getElementById('resultsSection'),grid=document.getElementById('resultsGrid'),statsRow=document.getElementById('statsRow');
+document.getElementById('resultZip').textContent=zip;
+const total=calls.length;
+const appts=calls.filter(c=>c.outcome==='Appointment Set'||c.outcome==='Hot Lead');
+const apptCount=appts.length,convRate=((apptCount/total)*100).toFixed(1),hotLeads=calls.filter(c=>c.outcome==='Hot Lead').length;
+const phoneA=calls.filter(c=>c.appt_format==='Phone Appointment').length;
+const inPersonA=calls.filter(c=>c.appt_format==='In-Person Appointment').length;
+const virtualA=calls.filter(c=>c.appt_format==='Virtual Walkthrough').length;
+const totalAF=phoneA+inPersonA+virtualA||1;
+const vacant=calls.filter(c=>c.occupancy==='Vacant').length;
+const tenantOcc=calls.filter(c=>c.occupancy==='Tenant Occupied').length;
+const ownerOcc=calls.filter(c=>c.occupancy==='Owner Occupied').length;
+const motCounts={};calls.forEach(c=>(c.motivations||[]).forEach(m=>{motCounts[m]=(motCounts[m]||0)+1}));
+const totalMT=Object.values(motCounts).reduce((a,b)=>a+b,0)||1;
+const motTrends=Object.entries(motCounts).map(([l,c])=>({label:l,count:c,pct:Math.round(c/totalMT*100)})).sort((a,b)=>b.count-a.count).slice(0,8);
+const tlCounts={};calls.forEach(c=>{if(c.timeline)tlCounts[c.timeline]=(tlCounts[c.timeline]||0)+1});
+const tlTrends=Object.entries(tlCounts).map(([l,c])=>({label:l,count:c,pct:Math.round(c/total*100)})).sort((a,b)=>b.count-a.count);
+const durs=calls.filter(c=>c.duration).map(c=>c.duration);
+const avgDur=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):'—';
+const dates=calls.map(c=>c.date).filter(Boolean).sort();
+const dateRange=dates.length>=2?`${fD(dates[0])} — ${fD(dates[dates.length-1])}`:dates[0]?fD(dates[0]):'';
+document.getElementById('resultsMeta').textContent=dateRange?`Based on ${total} call${total!==1?'s':''} · ${dateRange}`:`Based on ${total} call${total!==1?'s':''}`;
+
+// Extract successful verbiage
+const successCalls=calls.filter(c=>c.outcome==='Appointment Set'||c.outcome==='Hot Lead');
+const allPhrases=[];
+successCalls.forEach(c=>(c.successful_phrases||[]).forEach(p=>{if(p&&p.trim())allPhrases.push({text:p.trim(),mot:(c.motivations||[])[0]||'General',occ:c.occupancy||'',af:c.appt_format||''})}));
+const pFreq={};allPhrases.forEach(p=>{const k=p.text.toLowerCase();if(!pFreq[k])pFreq[k]={text:p.text,count:0,mots:new Set(),occs:new Set()};pFreq[k].count++;pFreq[k].mots.add(p.mot);pFreq[k].occs.add(p.occ)});
+const ranked=Object.values(pFreq).sort((a,b)=>b.count-a.count);
+
+statsRow.innerHTML=`
+<div class="stat-pill"><div class="num">${total}</div><div class="lbl">Total Calls</div></div>
+<div class="stat-pill"><div class="num">${apptCount}</div><div class="lbl">Appointments</div></div>
+<div class="stat-pill"><div class="num" style="color:var(--teal)">${convRate}%</div><div class="lbl">Conversion</div></div>
+<div class="stat-pill"><div class="num" style="color:var(--red)">${hotLeads}</div><div class="lbl">Hot Leads</div></div>
+<div class="stat-pill"><div class="num">${avgDur}<span style="font-size:12px;color:var(--text-muted)">m</span></div><div class="lbl">Avg Duration</div></div>`;
+
+grid.innerHTML='';
+
+// 1. Motivation Trends
+grid.innerHTML+=`<div class="card"><div class="card-hdr"><div class="card-ico ico-teal">🎯</div><div><div class="card-title">Seller Motivations</div><div class="card-sub">Why sellers in ${zip} want to sell · from ${total} calls</div></div></div>${motTrends.map(m=>`<div class="trend-row"><div class="trend-lbl"><span>${m.label}</span><span class="pct">${m.pct}%</span></div><div class="trend-bar"><div class="trend-fill fill-teal" style="width:${m.pct}%"></div></div></div>`).join('')}<div class="ai-box"><div class="ai-lbl">🧠 LeadIQ Insight</div><p>${motTrends.length>=2?`<strong>${motTrends[0].label}</strong> dominates at ${motTrends[0].pct}% followed by <strong>${motTrends[1].label}</strong> at ${motTrends[1].pct}%. Tailor your opener to their specific situation — generic pitches underperform 2-3x.`:`Limited data. Submit more calls.`}</p></div></div>`;
+
+// 2. Timeline
+grid.innerHTML+=`<div class="card"><div class="card-hdr"><div class="card-ico ico-amber">⏱</div><div><div class="card-title">Seller Timeline</div><div class="card-sub">How urgently sellers want to close · from ${total} calls</div></div></div>${tlTrends.map(t=>`<div class="trend-row"><div class="trend-lbl"><span>${t.label}</span><span class="pct">${t.pct}%</span></div><div class="trend-bar"><div class="trend-fill fill-amber" style="width:${t.pct}%"></div></div></div>`).join('')}<div class="ai-box"><div class="ai-lbl">🧠 LeadIQ Insight</div><p>${tlTrends[0]?`Most sellers (${tlTrends[0].pct}%) are on a <strong>${tlTrends[0].label.toLowerCase()}</strong> timeline. ${tlTrends[0].label.includes('ASAP')?'Lead with speed — mention "10 to 14 days" and "offer the same day."':'Build trust first. These sellers need a consultative approach before committing.'}`:'Not enough data.'}</p></div></div>`;
+
+// 3. Occupancy
+grid.innerHTML+=`<div class="card"><div class="card-hdr"><div class="card-ico ico-purple">🏠</div><div><div class="card-title">Occupancy Status</div><div class="card-sub">Vacant (absentee) vs Tenant Occupied vs Owner · from ${total} calls</div></div></div><div class="split-bar"><div class="seg" style="width:${Math.max(vacant/total*100,8)}%;background:var(--purple)">${Math.round(vacant/total*100)}%</div><div class="seg" style="width:${Math.max(tenantOcc/total*100,8)}%;background:var(--amber)">${Math.round(tenantOcc/total*100)}%</div><div class="seg" style="width:${Math.max(ownerOcc/total*100,8)}%;background:var(--blue)">${Math.round(ownerOcc/total*100)}%</div></div><div class="split-legend"><div class="leg"><div class="dot" style="background:var(--purple)"></div>Vacant / Absentee (${vacant})</div><div class="leg"><div class="dot" style="background:var(--amber)"></div>Tenant Occupied (${tenantOcc})</div><div class="leg"><div class="dot" style="background:var(--blue)"></div>Owner Occupied (${ownerOcc})</div></div>${tenantOcc>0?`<div class="ai-box"><div class="ai-lbl">🧠 Landlord Insight</div><p><strong>${Math.round(tenantOcc/total*100)}% are tenant-occupied</strong> (landlords). These respond to pain-point relief: tenant headaches, eviction costs, distance management. Emphasize "as-is, tenant-in-place" purchases. Use "What if I could take that off your plate?"</p></div>`:''}${vacant>total/2?`<div class="ai-box"><div class="ai-lbl">🧠 Vacancy Insight</div><p><strong>${Math.round(vacant/total*100)}% are vacant/absentee</strong> — frame selling as stopping a financial leak. "Every month it sits empty is costing you in taxes, insurance, and deterioration."</p></div>`:''}</div>`;
+
+// 4. Appointment Format
+grid.innerHTML+=`<div class="card"><div class="card-hdr"><div class="card-ico ico-blue">📞</div><div><div class="card-title">Appointment Format</div><div class="card-sub">Phone vs In-Person vs Virtual · from ${totalAF} appointments</div></div></div><div class="split-bar">${phoneA?`<div class="seg" style="width:${phoneA/totalAF*100}%;background:var(--blue)">${Math.round(phoneA/totalAF*100)}%</div>`:''}${inPersonA?`<div class="seg" style="width:${inPersonA/totalAF*100}%;background:var(--teal)">${Math.round(inPersonA/totalAF*100)}%</div>`:''}${virtualA?`<div class="seg" style="width:${virtualA/totalAF*100}%;background:var(--purple)">${Math.round(virtualA/totalAF*100)}%</div>`:''}</div><div class="split-legend"><div class="leg"><div class="dot" style="background:var(--blue)"></div>Phone (${phoneA})</div><div class="leg"><div class="dot" style="background:var(--teal)"></div>In-Person (${inPersonA})</div>${virtualA?`<div class="leg"><div class="dot" style="background:var(--purple)"></div>Virtual (${virtualA})</div>`:''}</div><div class="ai-box"><div class="ai-lbl">🧠 LeadIQ Insight</div><p>${phoneA>=inPersonA?`<strong>Phone appointments lead at ${Math.round(phoneA/totalAF*100)}%</strong>. Sellers prefer low-barrier phone calls first. Close with "Can I call you back with some numbers?" not "Can I come by?"`:`<strong>In-person leads at ${Math.round(inPersonA/totalAF*100)}%</strong>. Sellers want face-to-face meetings — higher trust required. Close with "Can I come by and walk through the property?"`}</p></div></div>`;
+
+// 5. Most Successful Verbiage
+grid.innerHTML+=`<div class="card full"><div class="card-hdr"><div class="card-ico ico-green">💬</div><div><div class="card-title">Most Successful Verbiage</div><div class="card-sub">Exact phrases from ${successCalls.length} successful calls — ranked by frequency</div></div></div>${ranked.length?ranked.slice(0,12).map(p=>`<div class="phrase-card"><div class="tag verbiage">Real Call Data${p.count>1?` · Used ${p.count}x`:''}</div><blockquote>"${p.text}"</blockquote><div class="ctx">Worked with: ${[...p.mots].join(', ')}${p.occs.size?` · ${[...p.occs].filter(Boolean).join(', ')}`:''}</div></div>`).join(''):'<div class="empty-state"><div class="icon">🎙</div><h4>No Verbiage Data Yet</h4><p>Submit calls with "Successful Phrases" to see which words convert.</p></div>'}</div>`;
+
+// 6. AI Scripts
+const phrases=genPhrases(motTrends,calls);
+grid.innerHTML+=`<div class="card full"><div class="card-hdr"><div class="card-ico ico-blue">🎯</div><div><div class="card-title">AI-Recommended Scripts</div><div class="card-sub">Opening & closing lines tailored to ${zip} · based on ${total} calls</div></div></div><div class="phrases-grid"><div><div class="sec-label">Best Opening Lines</div>${phrases.openings.map(p=>`<div class="phrase-card"><div class="tag opening">Opening</div><blockquote>"${p.text}"</blockquote><div class="ctx">Best for: ${p.ctx}</div></div>`).join('')}</div><div><div class="sec-label">Best Closing Lines</div>${phrases.closings.map(p=>`<div class="phrase-card"><div class="tag closing">Closing</div><blockquote>"${p.text}"</blockquote><div class="ctx">Best for: ${p.ctx}</div></div>`).join('')}</div></div></div>`;
+
+// 7. Approach
+const app=genApproach(calls);
+grid.innerHTML+=`<div class="card full"><div class="card-hdr"><div class="card-ico ico-red">🧭</div><div><div class="card-title">Recommended Approach</div><div class="card-sub">Go fast, slow, or adapt — based on ${total} real ${zip} calls</div></div></div>${app.map(a=>`<div class="approach-box"><h5><span class="spd ${a.cls}">${a.speed}</span>${a.title}</h5><p>${a.desc}</p></div>`).join('')}<div class="ai-box"><div class="ai-lbl">🧠 LeadIQ Strategy</div><p>With <strong>${convRate}% conversion</strong> and <strong>${motTrends[0]?.label||'varied'}</strong> as top motivation, ${zip} responds best to scripts opening with empathy and closing with a specific next step. Sellers prefer <strong>${phoneA>=inPersonA?'phone appointments':'in-person visits'}</strong>. ${vacant>total/2?'Most properties are vacant — frame selling as stopping a cost drain.':tenantOcc>total*0.25?Math.round(tenantOcc/total*100)+'% are tenant-occupied — emphasize as-is purchases.':'Most are owner-occupied — build personal rapport.'} Top timeline: <strong>${(tlTrends[0]?.label||'varied').toLowerCase()}</strong>.</p></div></div>`;
+
+// Leaderboard
+const lbHtml=buildLeaderboardCard(calls);
+if(lbHtml)grid.innerHTML+=lbHtml;
+
+section.classList.add('visible');section.scrollIntoView({behavior:'smooth',block:'start'});
+// Show AI Augment button
+document.getElementById('aiAugmentWrap').classList.add('visible');
+document.getElementById('aiResearchCard').classList.remove('visible');
+// Store context for AI augment
+window._lastSearch={zip,calls,motTrends,tlTrends,convRate,phoneA,inPersonA,vacant,tenantOcc,ownerOcc,total,ranked};
+}
+
+function genPhrases(motTrends,calls){
+const top=motTrends[0]?.label||'General';
+const bank={
+'Pre-Foreclosure':{openings:[{text:'I understand this is a difficult situation, and I just want you to know you have options you might not be aware of.',ctx:'Pre-Foreclosure / Financial Hardship'},{text:'I am not here to pressure you. I just wanted to reach out in case you were exploring your options.',ctx:'Pre-Foreclosure — low pressure'}],closings:[{text:'Would it help if I just ran some numbers and called you back? No strings.',ctx:'Pre-Foreclosure — phone close'},{text:'Can I come by this week? No obligation, just so I can give you an accurate number.',ctx:'Pre-Foreclosure — in-person close'}]},
+'Tax Delinquent':{openings:[{text:'I understand there is a deadline approaching. I help homeowners sell before the tax sale — we can close in 10 to 14 days.',ctx:'Tax Delinquent — urgency'},{text:'I work with homeowners dealing with back taxes. I want to make sure you know your options.',ctx:'Tax Delinquent — soft'}],closings:[{text:'The sooner we move, the more options you have. Can I come see the property tomorrow?',ctx:'Tax Delinquent — urgency close'},{text:'You do not have to fix anything — investors buy as-is. Want me to get you a number?',ctx:'Tax Delinquent — as-is close'}]},
+'Inherited Property':{openings:[{text:'I am sorry for your loss. I work with families in this exact situation, and there is absolutely no rush.',ctx:'Inherited / Probate — empathy'},{text:'There is no pressure or timeline. I just wanted to be a resource when you are ready.',ctx:'Inherited — soft intro'}],closings:[{text:'Can I call you next week just to check in? No agenda.',ctx:'Inherited — nurture close'},{text:'I can handle all the details. Would it help to talk through what the process looks like?',ctx:'Inherited — supportive close'}]},
+'Tired Landlord':{openings:[{text:'I know dealing with problem tenants from a distance is exhausting. I work with landlords who want out from under that stress.',ctx:'Tired Landlord / Tenant Occupied'},{text:'What if I could get you a fair cash offer so you can move on from the tenant headaches?',ctx:'Landlord — direct'}],closings:[{text:'If the numbers make sense, we can talk next steps. Sound fair?',ctx:'Landlord — logical close'},{text:'We buy with tenants in place. No eviction needed. Let me get you a range.',ctx:'Tenant Occupied — friction removal'}]},
+'Divorce':{openings:[{text:'I can help make this one less thing to worry about. I specialize in quick, clean closings.',ctx:'Divorce — efficiency'}],closings:[{text:'I can have a written offer within 24 hours of seeing the property. When works for you?',ctx:'Divorce — speed close'}]},
+'Expired Listing':{openings:[{text:'A fresh set of eyes and a different approach is all it takes. I would love to show you what I think can work.',ctx:'Expired Listing'}],closings:[{text:'Can we do a quick 15-minute call? I will share my analysis of what went wrong and how to fix it.',ctx:'Expired — value close'}]},
+'General':{openings:[{text:'I work with homeowners in your area. Just wanted to see if you have ever thought about selling — no pressure.',ctx:'General outreach'},{text:'Even if now is not the right time, I would love to be a resource for you.',ctx:'General warm'}],closings:[{text:'Would it help if I sent a free market analysis? No strings attached.',ctx:'General — value close'},{text:'If anything changes, you have my number. Okay if I follow up in a couple weeks?',ctx:'General — permission close'}]}
+};
+const b=bank[top]||bank['General'],g=bank['General'];
+let o=[...(b.openings||[])],c=[...(b.closings||[])];
+if(motTrends[1]){const s=bank[motTrends[1].label];if(s){if(s.openings?.[0])o.push(s.openings[0]);if(s.closings?.[0])c.push(s.closings[0])}}
+while(o.length<2)o.push(g.openings[o.length]||g.openings[0]);
+while(c.length<2)c.push(g.closings[c.length]||g.closings[0]);
+return{openings:o.slice(0,3),closings:c.slice(0,3)};
+}
+
+function genApproach(calls){
+const a=[];const total=calls.length;
+const dist=['Pre-Foreclosure','Tax Delinquent','Financial Hardship','Divorce'];
+const emo=['Inherited Property','Probate','Senior Owner','Downsizing'];
+const ll=['Tired Landlord','Absentee Owner'];
+const dC=calls.filter(c=>(c.motivations||[]).some(m=>dist.includes(m))).length;
+const eC=calls.filter(c=>(c.motivations||[]).some(m=>emo.includes(m))).length;
+const lC=calls.filter(c=>(c.motivations||[]).some(m=>ll.includes(m))).length;
+if(dC)a.push({speed:'FAST',cls:'spd-fast',title:`Distressed Sellers (${Math.round(dC/total*100)}%)`,desc:'Under time/financial pressure. Lead with solutions and speed — "10 to 14 days," "as-is," "we handle everything." Acknowledge their situation first, then present the solution. Get to value in 30 seconds. Close with a specific date and time.'});
+if(eC)a.push({speed:'SLOW',cls:'spd-slow',title:`Life Transition Sellers (${Math.round(eC/total*100)}%)`,desc:'Inherited, senior, downsizing sellers need patience. Acknowledge personally ("I am sorry for your loss" / "There is no rush"). Do not mention price upfront. Let them share their story. Calls run 15-20+ min but convert higher. Follow up with a personal check-in, not a pitch.'});
+if(lC)a.push({speed:'DIRECT',cls:'spd-med',title:`Landlords & Absentee Owners (${Math.round(lC/total*100)}%)`,desc:'Respond to logic and pain-point relief. Frame selling as solving a business problem: tenant headaches, vacancy costs, maintenance burden. "What if I could take that off your plate?" and "We buy with tenants in place." Present numbers, not emotions. Close with "Let me get you a range."'});
+a.push({speed:'ADAPT',cls:'spd-med',title:'Universal: Mirror & Match',desc:'Mirror the seller\'s energy. Rushed sellers get concise, action-oriented responses. Hesitant sellers get open questions and patience. The first 60 seconds determine the call. Always end with a clear next step: a date, a time, or permission to follow up.'});
+return a;
+}
+
+function fD(d){try{return new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})}catch{return d}}
+
+async function submitCall(){
+const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='Submitting...';
+const afSel=document.getElementById('afGrid')?.querySelector('.sel')?.textContent||'No Appointment';
+const pLines=(document.getElementById('fPhrases')?.value||'').split('\n').map(l=>l.trim()).filter(Boolean);
+const d={date:document.getElementById('fDate').value,time:document.getElementById('fTime').value,duration:parseInt(document.getElementById('fDuration').value)||null,seller_name:document.getElementById('fSellerName').value,address:document.getElementById('fAddress').value,city:document.getElementById('fCity').value,state:document.getElementById('fState').value,zip:document.getElementById('fZip').value,property_type:document.getElementById('fPropType').value,occupancy:selOccupancy,appt_format:afSel,asking_price:document.getElementById('fPrice').value,timeline:document.getElementById('fTimeline').value,outcome:selOutcome,motivations:selMotivations,upgrades:document.getElementById('fUpgrades').value,notes:document.getElementById('fNotes').value,successful_phrases:pLines,created_at:new Date().toISOString(),contributor:getContributorTag()};
+if(!d.zip){alert('ZIP code required.');btn.disabled=false;btn.textContent='Submit Call';return}
+if(demoMode){DEMO_CALLS.unshift(d);alert('Added to demo data! Search the ZIP to see updated trends.')}
+else{try{const{error}=await sbClient.from('calls').insert([d]);if(error)throw error;alert('Submitted!')}catch(e){console.error(e);alert('Error. Check console.');btn.disabled=false;btn.textContent='Submit Call';return}}
+incrementContributorCount();
+btn.disabled=false;btn.textContent='Submit Call';selMotivations=[];selOutcome='No Answer';selOccupancy='Vacant';buildForm();closeModal();
+}
+
+// ╔═══════════════════════════════════════════╗
+// ║  PLATFORM STATS (homepage)                 ║
+// ╚═══════════════════════════════════════════╝
+async function loadPlatformStats(){
+  let calls=[];
+  if(demoMode){
+    calls=DEMO_CALLS;
+  } else {
+    try{
+      const{data}=await sbClient.from('calls').select('zip,date,outcome');
+      calls=data||DEMO_CALLS;
+    }catch(e){calls=DEMO_CALLS}
+  }
+  if(!calls.length){document.getElementById('platformStats').innerHTML='';return}
+
+  const totalCalls=calls.length;
+  const zips=[...new Set(calls.map(c=>c.zip).filter(Boolean))].sort();
+  const appts=calls.filter(c=>c.outcome==='Appointment Set'||c.outcome==='Hot Lead').length;
+  const dates=calls.map(c=>c.date).filter(Boolean).sort();
+  const mostRecent=dates.length?dates[dates.length-1]:'';
+
+  // Format recency
+  let recencyText='';
+  if(mostRecent){
+    const diff=Math.floor((new Date()-new Date(mostRecent+'T00:00:00'))/(1000*60*60*24));
+    if(diff===0)recencyText='Today';
+    else if(diff===1)recencyText='Yesterday';
+    else if(diff<7)recencyText=diff+' days ago';
+    else if(diff<30)recencyText=Math.floor(diff/7)+' week'+(Math.floor(diff/7)>1?'s':'')+' ago';
+    else recencyText=Math.floor(diff/30)+' month'+(Math.floor(diff/30)>1?'s':'')+' ago';
+  }
+
+  // Count calls per ZIP for sorting
+  const zipCounts={};
+  calls.forEach(c=>{if(c.zip)zipCounts[c.zip]=(zipCounts[c.zip]||0)+1});
+  const sortedZips=Object.entries(zipCounts).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+
+  document.getElementById('platformStats').innerHTML=`
+    <div class="platform-stats">
+      <div class="ps-item"><div class="ps-num"><span class="ps-accent">${totalCalls}</span></div><div class="ps-label">Calls Analyzed</div></div>
+      <div class="ps-item"><div class="ps-num"><span class="ps-accent">${zips.length}</span></div><div class="ps-label">ZIP Codes</div></div>
+      <div class="ps-item"><div class="ps-num"><span class="ps-accent">${appts}</span></div><div class="ps-label">Appointments Set</div></div>
+      ${recencyText?`<div class="ps-item"><div class="ps-num"><span class="ps-accent">${recencyText}</span></div><div class="ps-label">Most Recent Data</div></div>`:''}
+    </div>
+    ${sortedZips.length?`<div class="ps-zips">${sortedZips.map(z=>`<span class="ps-zip" onclick="document.getElementById('zipInput').value='${z}';searchZip()">${z} <span style="opacity:0.5;font-weight:400">(${zipCounts[z]})</span></span>`).join('')}</div>`:''}
+  `;
+}
+
+// ╔═══════════════════════════════════════════╗
+// ║  CONTRIBUTOR MODE                          ║
+// ╚═══════════════════════════════════════════╝
+function openContribSignup(){
+  if(contributor){alert('You are already a contributor! Use Quick Log or Full Submit to add calls.');return}
+  document.getElementById('contribOverlay').classList.add('visible');
+}
+function closeContribSignup(){document.getElementById('contribOverlay').classList.remove('visible')}
+
+function joinAsContributor(){
+  const alias=document.getElementById('contribAlias').value.trim();
+  const market=document.getElementById('contribMarket').value.trim();
+  const role=document.getElementById('contribRole').value;
+  const exp=document.getElementById('contribExp').value;
+  if(!alias){alert('Pick an alias — this is how you appear on the leaderboard.');return}
+  if(!market){alert('Enter your market/city so we can tag your contributions.');return}
+  contributor={alias,market,role,exp,joinedAt:new Date().toISOString(),callCount:0};
+  try{localStorage.setItem('lp_contributor',JSON.stringify(contributor))}catch(e){}
+  // Save to Supabase if connected
+  if(!demoMode&&sbClient){
+    sbClient.from('contributors').insert([{alias,market,role,experience:exp,created_at:new Date().toISOString()}]).then(()=>{}).catch(()=>{});
+  }
+  activateContributor();
+  closeContribSignup();
+}
+
+function activateContributor(){
+  // Show submit buttons
+  document.getElementById('submitNavBtn').style.display='';
+  document.getElementById('qsNavBtn').style.display='';
+  // Hide the "Contribute" button, show badge
+  document.getElementById('contribNavBtn').style.display='none';
+  document.getElementById('contribBadgeNav').style.display='';
+  document.getElementById('contribBadgeNav').innerHTML=`<span class="contrib-badge-nav"><span class="cb-dot"></span>${contributor.alias}</span>`;
+  // Hide the CTA on hero
+  const cta=document.getElementById('contribCta');
+  if(cta)cta.style.display='none';
+}
+
+function getContributorTag(){
+  return contributor?contributor.alias:'Anonymous';
+}
+
+function incrementContributorCount(){
+  if(!contributor)return;
+  contributor.callCount=(contributor.callCount||0)+1;
+  try{localStorage.setItem('lp_contributor',JSON.stringify(contributor))}catch(e){}
+}
+
+function buildLeaderboardCard(calls){
+  // Count calls per contributor
+  const counts={};
+  calls.forEach(c=>{
+    const who=c.contributor||'LeadPulse';
+    counts[who]=(counts[who]||0)+1;
+  });
+  const sorted=Object.entries(counts).map(([name,count])=>({name,count})).sort((a,b)=>b.count-a.count).slice(0,5);
+  if(sorted.length<2)return''; // Not enough contributors to show
+  const rankClass=(i)=>i===0?'gold':i===1?'silver':i===2?'bronze':'std';
+  return `<div class="card">
+    <div class="card-hdr"><div class="card-ico ico-amber">🏆</div><div><div class="card-title">Top Contributors</div><div class="card-sub">Most calls submitted for this ZIP</div></div></div>
+    ${sorted.map((c,i)=>`<div class="leaderboard-row"><div class="lb-rank ${rankClass(i)}">${i+1}</div><div class="lb-info"><div class="lb-name">${c.name}</div></div><div class="lb-count">${c.count}</div></div>`).join('')}
+  </div>`;
+}
+
+// ╔═══════════════════════════════════════════╗
+// ║  QUICK SUBMIT (AI + MANUAL)                ║
+// ╚═══════════════════════════════════════════╝
+let currentQSTab='ai';
+let aiExtracted=null; // stores Gemini extraction result
+
+function openQuickSubmit(){
+  qsMotivations=[];qsOutcome='Appointment Set';qsOccupancy='Vacant';qsApptFormat='Phone Appointment';
+  aiExtracted=null;
+  currentQSTab='ai';
+  buildQSForm();
+  document.getElementById('qsOverlay').classList.add('visible');
+  document.getElementById('qsFooter').style.display='';
+  document.getElementById('qsTabAI').classList.add('active');
+  document.getElementById('qsTabBulk').classList.remove('active');
+  document.getElementById('qsTabManual').classList.remove('active');
+  document.getElementById('qsSubmitBtn').textContent='Analyze & Log 🤖';
+  document.getElementById('qsSubmitBtn').onclick=aiSubmit;
+}
+function closeQS(){document.getElementById('qsOverlay').classList.remove('visible')}
+
+function switchQSTab(tab){
+  currentQSTab=tab;
+  document.getElementById('qsTabAI').classList.toggle('active',tab==='ai');
+  document.getElementById('qsTabBulk').classList.toggle('active',tab==='bulk');
+  document.getElementById('qsTabManual').classList.toggle('active',tab==='manual');
+  document.getElementById('qsSubmitBtn').textContent=tab==='ai'?'Analyze & Log 🤖':tab==='bulk'?'Process All 📋':'Log Call ⚡';
+  document.getElementById('qsSubmitBtn').onclick=tab==='ai'?aiSubmit:tab==='bulk'?bulkSubmit:quickSubmit;
+  buildQSForm();
+}
+
+function buildQSForm(){
+const body=document.getElementById('qsBody');
+const lastZip=qsZip||document.getElementById('zipInput')?.value||'';
+
+if(currentQSTab==='ai'){
+  body.innerHTML=`
+  <div style="padding:4px 0">
+    <div class="qs-zip-bar">
+      <div class="fg" style="margin:0"><label>ZIP Code</label><input type="text" class="fc" id="qsZip" value="${lastZip}" placeholder="75216" maxlength="5" style="font-family:var(--fm);font-size:15px;text-align:center;padding:10px"></div>
+      ${lastZip?`<div class="qs-zip-lock">🔒 Sticky</div>`:''}
+      <div class="fg" style="margin:0;flex:1"><label>Agent / Caller Name</label><input type="text" class="fc" id="qsAgent" value="${qsAgent}" placeholder="e.g. Sam, Mike" style="padding:10px"></div>
+    </div>
+    <div class="qs-section" style="margin-top:12px">
+      <label>Paste Call Transcript from Slack</label>
+      <textarea class="qs-transcript" id="qsTranscript" rows="8" placeholder="Paste the full call transcript here...&#10;&#10;AI: Hi, this is Raquel calling about your property on Main Street...&#10;Seller: Yeah, what about it?&#10;AI: I understand you may be going through a difficult time..."></textarea>
+      <p style="font-size:10px;color:var(--t3);margin-top:6px">Gemini will extract everything. Agent name is also auto-detected from transcript if you leave it blank.</p>
+    </div>
+    <div id="aiPreviewArea"></div>
+  </div>`;
+} else if(currentQSTab==='bulk'){
+  body.innerHTML=`
+  <div style="padding:4px 0">
+    <div class="qs-zip-bar">
+      <div class="fg" style="margin:0;flex:1"><label>Default Agent Name</label><input type="text" class="fc" id="qsAgent" value="${qsAgent}" placeholder="e.g. Sam" style="padding:10px"></div>
+    </div>
+    <div class="qs-section" style="margin-top:12px">
+      <label>Paste Multiple Transcripts — each starts with ZIP + optional AGENT</label>
+      <textarea class="qs-transcript" id="qsBulkTranscripts" rows="14" placeholder="ZIP: 75216&#10;AGENT: Sam&#10;0:01 Hi, my name is Sam calling about your property...&#10;...rest of transcript...&#10;&#10;ZIP: 75228&#10;AGENT: Mike&#10;0:01 Hello, is this Robert?&#10;...rest of transcript...&#10;&#10;ZIP: 75217&#10;0:01 Hi ma'am, I'm calling about...&#10;(no AGENT line = uses default above)"></textarea>
+      <p style="font-size:10px;color:var(--t3);margin-top:6px">Start each with <strong style="color:var(--teal);font-family:var(--fm)">ZIP: 75216</strong>. Optionally add <strong style="color:var(--blue);font-family:var(--fm)">AGENT: Sam</strong> on the next line. If no AGENT line, uses the default above.</p>
+    </div>
+    <div id="bulkResultsArea"></div>
+  </div>`;
+} else {
+  body.innerHTML=`
+  <div class="qs-zip-bar">
+    <div class="fg" style="margin:0"><label>ZIP</label><input type="text" class="fc" id="qsZip" value="${lastZip}" placeholder="75216" maxlength="5" style="font-family:var(--fm);font-size:15px;text-align:center;padding:10px"></div>
+    ${lastZip?`<div class="qs-zip-lock">🔒 Sticky</div>`:''}
+    <div class="fg" style="margin:0;flex:1"><label>Agent Name</label><input type="text" class="fc" id="qsAgent" value="${qsAgent}" placeholder="e.g. Sam" style="padding:10px"></div>
+    <div class="fg" style="margin:0"><label>Duration</label><input type="number" class="fc" id="qsDuration" placeholder="10" style="padding:10px;width:70px"></div>
+  </div>
+  <div class="qs-section"><label>Outcome</label><div class="qs-tags" id="qsOutcomeGrid"></div></div>
+  <div class="qs-section"><label>Occupancy</label><div class="qs-tags" id="qsOccGrid"></div></div>
+  <div class="qs-section"><label>Appointment Format</label><div class="qs-tags" id="qsAfGrid"></div></div>
+  <div class="qs-section"><label>Motivation (tap all that apply)</label><div class="qs-tags" id="qsMotGrid"></div></div>
+  <div class="qs-section"><label>Timeline</label><select class="fc" id="qsTimeline" style="padding:10px">${TIMELINES.map(t=>`<option>${t}</option>`).join('')}</select></div>
+  <div class="qs-section"><label>Winning Phrases (one per line)</label><textarea class="qs-phrases" id="qsPhrases" rows="3" placeholder="I understand this is a difficult situation&#10;Would it help if I ran some numbers?"></textarea></div>
+  <div class="qs-section"><label>Quick Note (optional)</label><textarea class="qs-phrases" id="qsNotes" rows="2" placeholder="Short note about the call..."></textarea></div>`;
+  // Build manual toggle buttons
+  const outG=document.getElementById('qsOutcomeGrid');
+  OUTCOMES.forEach(o=>{const b=document.createElement('button');b.className='qs-tag'+(o==='Appointment Set'?' sel':'');b.textContent=o;b.type='button';b.onclick=()=>{qsOutcome=o;outG.querySelectorAll('.qs-tag').forEach(x=>{x.classList.remove('sel','hot');if(x.textContent===o){x.classList.add('sel');if(o==='Hot Lead')x.classList.add('hot')}})};outG.appendChild(b)});
+  const occG=document.getElementById('qsOccGrid');
+  OCCUPANCY_OPTS.forEach(o=>{const b=document.createElement('button');b.className='qs-tag'+(o==='Vacant'?' sel':'');b.textContent=o;b.type='button';b.onclick=()=>{qsOccupancy=o;occG.querySelectorAll('.qs-tag').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')};occG.appendChild(b)});
+  const afG=document.getElementById('qsAfGrid');
+  APPT_FORMATS.forEach(f=>{const b=document.createElement('button');b.className='qs-tag'+(f==='Phone Appointment'?' sel':'');b.textContent=f;b.type='button';b.onclick=()=>{qsApptFormat=f;afG.querySelectorAll('.qs-tag').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')};afG.appendChild(b)});
+  const motG=document.getElementById('qsMotGrid');
+  MOTIVATIONS.forEach(m=>{const b=document.createElement('button');b.className='qs-tag';b.textContent=m;b.type='button';b.onclick=()=>{if(qsMotivations.includes(m)){qsMotivations=qsMotivations.filter(x=>x!==m);b.classList.remove('sel')}else{qsMotivations.push(m);b.classList.add('sel')}};motG.appendChild(b)});
+}
+}
+
+// ── AI SUBMIT: Paste transcript → Gemini extracts → save ──
+async function aiSubmit(){
+const btn=document.getElementById('qsSubmitBtn');
+const zip=document.getElementById('qsZip').value.trim();
+const transcript=document.getElementById('qsTranscript')?.value?.trim();
+
+if(!zip||!/^\d{5}$/.test(zip)){alert('Enter a valid ZIP code.');return}
+if(!transcript||transcript.length<50){alert('Paste a call transcript (at least a few lines of dialogue).');return}
+
+btn.disabled=true;btn.textContent='Analyzing with Gemini...';
+qsZip=zip;
+
+// Show analyzing state
+const preview=document.getElementById('aiPreviewArea');
+preview.innerHTML=`<div class="ai-analyzing"><div class="typing-dots"><span></span><span></span><span></span></div><p>Gemini 2.5 Flash is reading the transcript...</p></div>`;
+
+const prompt=`Analyze this cold call transcript from a real estate appointment setter calling a motivated seller. Extract the following and return ONLY valid JSON, no markdown, no backticks, no explanation:
+
+{
+  "outcome": one of: "No Answer", "Voicemail", "Not Interested", "Callback Requested", "Appointment Set", "Hot Lead",
+  "motivations": array of applicable motivations from this list: ["Pre-Foreclosure", "Tax Delinquent", "Absentee Owner", "Inherited Property", "Vacant Property", "Senior Owner", "Expired Listing", "Divorce", "Code Violation", "Probate", "Downsizing", "Relocation", "Financial Hardship", "Tired Landlord"],
+  "timeline": one of: "ASAP (under 2 weeks)", "1-3 months", "3-6 months", "6+ months / Flexible", "Not specified",
+  "occupancy": one of: "Vacant", "Tenant Occupied", "Owner Occupied",
+  "appt_format": one of: "Phone Appointment", "In-Person Appointment", "Virtual Walkthrough", "No Appointment",
+  "seller_name": string or empty,
+  "agent_name": the name of the caller/appointment setter (look for "my name is..." or "this is..." in the transcript) or empty,
+  "asking_price": string or empty,
+  "duration_estimate_minutes": number estimate based on transcript length,
+  "successful_phrases": array of 3-8 exact phrases or sentences from the CALLER (not the seller) that were most effective — the words that built rapport, overcame objections, or moved the seller toward an appointment. Quote them exactly as spoken. Only include phrases from calls that resulted in Appointment Set or Hot Lead. For other outcomes, return empty array.,
+  "call_summary": 1-2 sentence summary of what happened on the call,
+  "approach_used": one of: "Fast/Direct", "Slow/Empathetic", "Logical/Numbers", "Adaptive"
+}
+
+TRANSCRIPT:
+${transcript}`;
+
+try{
+  const response=await fetch(CONFIG.GEMINI_ENDPOINT,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.1}})
+  });
+  const data=await response.json();
+  let text=data?.candidates?.[0]?.content?.parts?.[0]?.text||'';
+  // Strip markdown fences if present
+  text=text.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+  aiExtracted=JSON.parse(text);
+}catch(e){
+  console.error('Gemini error:',e);
+  preview.innerHTML=`<div style="padding:12px;color:var(--red);font-size:12px">Gemini analysis failed. Try the Manual Entry tab instead, or check the transcript format.</div>`;
+  btn.disabled=false;btn.textContent='Analyze & Log 🤖';
+  return;
+}
+
+// Show preview of what Gemini extracted
+const ex=aiExtracted;
+preview.innerHTML=`
+<div class="ai-preview visible">
+  <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">🤖 Gemini Extraction</div>
+  <div class="ap-row"><span class="ap-label">Outcome</span><span class="ap-value" style="color:${ex.outcome==='Appointment Set'||ex.outcome==='Hot Lead'?'var(--teal)':ex.outcome==='Not Interested'?'var(--red)':'var(--t1)'}">${ex.outcome}</span></div>
+  <div class="ap-row"><span class="ap-label">Motivations</span><span class="ap-value">${(ex.motivations||[]).join(', ')||'—'}</span></div>
+  <div class="ap-row"><span class="ap-label">Timeline</span><span class="ap-value">${ex.timeline||'—'}</span></div>
+  <div class="ap-row"><span class="ap-label">Occupancy</span><span class="ap-value">${ex.occupancy||'—'}</span></div>
+  <div class="ap-row"><span class="ap-label">Appt Format</span><span class="ap-value">${ex.appt_format||'—'}</span></div>
+  ${ex.seller_name?`<div class="ap-row"><span class="ap-label">Seller</span><span class="ap-value">${ex.seller_name}</span></div>`:''}
+  ${ex.asking_price?`<div class="ap-row"><span class="ap-label">Asking Price</span><span class="ap-value">${ex.asking_price}</span></div>`:''}
+  <div class="ap-row"><span class="ap-label">Approach</span><span class="ap-value">${ex.approach_used||'—'}</span></div>
+  ${ex.call_summary?`<div class="ap-row"><span class="ap-label">Summary</span><span class="ap-value" style="font-weight:400;font-size:11px">${ex.call_summary}</span></div>`:''}
+  ${(ex.successful_phrases||[]).length?`
+    <div class="ap-phrases">
+      <span class="ap-label">Key Phrases Extracted (${ex.successful_phrases.length})</span>
+      ${ex.successful_phrases.map(p=>`<div class="ap-phrase-item">"${p}"</div>`).join('')}
+    </div>
+  `:''}
+</div>`;
+
+// Now save to database
+const agentInput=document.getElementById('qsAgent')?.value?.trim()||'';
+const agentName=agentInput||ex.agent_name||'';
+if(agentName)qsAgent=agentName; // sticky
+const callData={
+  date:new Date().toISOString().split('T')[0],
+  time:new Date().toTimeString().slice(0,5),
+  duration:ex.duration_estimate_minutes||null,
+  seller_name:ex.seller_name||'',
+  agent_name:agentName,
+  address:'',city:'',state:'TX',zip:zip,
+  property_type:'Single Family',
+  occupancy:ex.occupancy||'Vacant',
+  appt_format:ex.appt_format||'No Appointment',
+  asking_price:ex.asking_price||'',
+  timeline:ex.timeline||'Not specified',
+  outcome:ex.outcome||'No Answer',
+  motivations:ex.motivations||[],
+  upgrades:'',
+  notes:ex.call_summary||'',
+  successful_phrases:ex.successful_phrases||[],
+  created_at:new Date().toISOString(),
+  contributor:getContributorTag(),
+};
+
+if(demoMode){DEMO_CALLS.unshift(callData)}
+else{try{const{error}=await sbClient.from('calls').insert([callData]);if(error)throw error}catch(e){console.error(e);alert('Saved to Gemini but failed to save to database.');}}
+
+incrementContributorCount();
+qsSessionCount++;
+document.getElementById('qsCounter').textContent=`${qsSessionCount} logged this session`;
+
+btn.disabled=false;btn.textContent='✅ Logged! Paste Another';
+btn.onclick=()=>{aiExtracted=null;btn.textContent='Analyze & Log 🤖';btn.onclick=aiSubmit;buildQSForm()};
+}
+
+// ── BULK SUBMIT: Multiple transcripts at once ──
+async function bulkSubmit(){
+const btn=document.getElementById('qsSubmitBtn');
+const defaultAgent=document.getElementById('qsAgent')?.value?.trim()||'';
+const raw=document.getElementById('qsBulkTranscripts')?.value?.trim();
+if(!raw||raw.length<50){alert('Paste at least one transcript.');return}
+
+// Split by ZIP: lines, extract optional AGENT: line
+const blocks=[];
+const parts=raw.split(/(?=^ZIP:\s*\d{5})/im);
+parts.forEach(p=>{
+  const t=p.trim();if(!t)return;
+  const zipM=t.match(/^ZIP:\s*(\d{5})\s*\n?/i);
+  if(zipM){
+    let rest=t.slice(zipM[0].length).trim();
+    let agent=defaultAgent;
+    const agentM=rest.match(/^AGENT:\s*(.+)\s*\n?/i);
+    if(agentM){agent=agentM[1].trim();rest=rest.slice(agentM[0].length).trim()}
+    if(rest.length>30)blocks.push({zip:zipM[1],agent,transcript:rest});
+  } else if(t.length>30)blocks.push({zip:'',agent:defaultAgent,transcript:t});
+});
+if(!blocks.length){alert('No valid transcripts found. Start each with ZIP: 75216');return}
+const noZip=blocks.filter(b=>!b.zip);
+if(noZip.length){alert(`${noZip.length} transcript(s) missing a ZIP: line.`);return}
+
+btn.disabled=true;
+const results=document.getElementById('bulkResultsArea');
+results.innerHTML=`<div class="bulk-progress"><div class="bp-bar-wrap"><div class="bp-bar" id="bpBar" style="width:0%"></div></div><div class="bp-status" id="bpStatus">Processing 0 of ${blocks.length}...</div></div>`;
+let successCount=0,failCount=0,apptCount=0,resultCards='';
+
+for(let i=0;i<blocks.length;i++){
+  const{zip,agent,transcript}=blocks[i];
+  document.getElementById('bpBar').style.width=Math.round(i/blocks.length*100)+'%';
+  document.getElementById('bpStatus').textContent=`Processing ${i+1} of ${blocks.length} (ZIP: ${zip})...`;
+
+  const prompt=`Analyze this cold call transcript from a real estate appointment setter. Return ONLY valid JSON, no markdown, no backticks:
+{"outcome":"one of: No Answer|Voicemail|Not Interested|Callback Requested|Appointment Set|Hot Lead","motivations":["from: Pre-Foreclosure,Tax Delinquent,Absentee Owner,Inherited Property,Vacant Property,Senior Owner,Expired Listing,Divorce,Code Violation,Probate,Downsizing,Relocation,Financial Hardship,Tired Landlord"],"timeline":"one of: ASAP (under 2 weeks)|1-3 months|3-6 months|6+ months / Flexible|Not specified","occupancy":"Vacant|Tenant Occupied|Owner Occupied","appt_format":"Phone Appointment|In-Person Appointment|Virtual Walkthrough|No Appointment","seller_name":"","agent_name":"name of the caller if mentioned","asking_price":"","duration_estimate_minutes":0,"successful_phrases":["3-8 exact caller phrases that worked, only if Appointment Set or Hot Lead, else empty"],"call_summary":"1-2 sentences","approach_used":"Fast/Direct|Slow/Empathetic|Logical/Numbers|Adaptive"}
+
+TRANSCRIPT:
+${transcript}`;
+
+  try{
+    const r=await fetch(CONFIG.GEMINI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.1}})});
+    const d=await r.json();
+    let txt=d?.candidates?.[0]?.content?.parts?.[0]?.text||'';
+    txt=txt.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+    const ex=JSON.parse(txt);
+    const callData={date:new Date().toISOString().split('T')[0],time:new Date().toTimeString().slice(0,5),duration:ex.duration_estimate_minutes||null,seller_name:ex.seller_name||'',agent_name:agent||ex.agent_name||'',address:'',city:'',state:'TX',zip:zip,property_type:'Single Family',occupancy:ex.occupancy||'Vacant',appt_format:ex.appt_format||'No Appointment',asking_price:ex.asking_price||'',timeline:ex.timeline||'Not specified',outcome:ex.outcome||'No Answer',motivations:ex.motivations||[],upgrades:'',notes:ex.call_summary||'',successful_phrases:ex.successful_phrases||[],created_at:new Date().toISOString(),contributor:getContributorTag()};
+    if(demoMode){DEMO_CALLS.unshift(callData)}else{try{await sbClient.from('calls').insert([callData])}catch(e){console.error(e)}}
+    incrementContributorCount();qsSessionCount++;successCount++;
+    if(ex.outcome==='Appointment Set'||ex.outcome==='Hot Lead')apptCount++;
+    const oc=ex.outcome==='Appointment Set'?'appt':ex.outcome==='Hot Lead'?'hot':'other';
+    resultCards+=`<div class="bulk-result success"><div class="br-head"><span class="br-num">#${i+1} · ${zip}</span><span class="br-outcome ${oc}">${ex.outcome}</span></div><div class="br-details">${ex.seller_name||'Unknown'} · ${(ex.motivations||[]).join(', ')||'—'} · ${ex.timeline||'—'}</div>${(ex.successful_phrases||[]).length?`<div class="br-phrases">"${ex.successful_phrases[0]}"${ex.successful_phrases.length>1?` +${ex.successful_phrases.length-1} more`:''}</div>`:''}</div>`;
+  }catch(e){
+    console.error('Bulk #'+i+' failed:',e);failCount++;
+    resultCards+=`<div class="bulk-result fail"><div class="br-head"><span class="br-num">#${i+1} · ${zip}</span><span class="br-outcome other">Failed</span></div><div class="br-details">Gemini could not parse this transcript.</div></div>`;
+  }
+  if(i<blocks.length-1)await new Promise(r=>setTimeout(r,500));
+}
+document.getElementById('bpBar').style.width='100%';
+document.getElementById('bpStatus').textContent=`Done! ${successCount} processed, ${failCount} failed.`;
+document.getElementById('qsCounter').textContent=`${qsSessionCount} logged this session`;
+results.innerHTML=`<div class="bulk-summary"><div class="bs-big">${successCount}</div><div class="bs-label">Calls Logged</div><div style="display:flex;gap:16px;justify-content:center;margin-top:8px"><span style="font-size:11px;color:var(--teal)">${apptCount} appointments</span>${failCount?`<span style="font-size:11px;color:var(--red)">${failCount} failed</span>`:''}</div></div>${resultCards}`;
+btn.disabled=false;btn.textContent='Process All 📋';
+}
+
+// ── MANUAL SUBMIT (unchanged) ──
+async function quickSubmit(){
+const btn=document.getElementById('qsSubmitBtn');
+const zip=document.getElementById('qsZip').value.trim();
+if(!zip||!/^\d{5}$/.test(zip)){alert('Enter a valid ZIP.');return}
+btn.disabled=true;btn.textContent='Logging...';
+qsZip=zip;
+const manualAgent=document.getElementById('qsAgent')?.value?.trim()||'';
+if(manualAgent)qsAgent=manualAgent;
+const pLines=(document.getElementById('qsPhrases')?.value||'').split('\n').map(l=>l.trim()).filter(Boolean);
+const callData={
+  date:new Date().toISOString().split('T')[0],
+  time:new Date().toTimeString().slice(0,5),
+  duration:parseInt(document.getElementById('qsDuration')?.value)||null,
+  seller_name:'',agent_name:manualAgent,address:'',city:'',state:'TX',zip:zip,
+  property_type:'Single Family',occupancy:qsOccupancy,appt_format:qsApptFormat,
+  asking_price:'',timeline:document.getElementById('qsTimeline')?.value||'Not specified',
+  outcome:qsOutcome,motivations:qsMotivations,upgrades:'',
+  notes:document.getElementById('qsNotes')?.value||'',
+  successful_phrases:pLines,created_at:new Date().toISOString(),
+  contributor:getContributorTag(),
+};
+if(demoMode){DEMO_CALLS.unshift(callData)}
+else{try{const{error}=await sbClient.from('calls').insert([callData]);if(error)throw error}catch(e){console.error(e);alert('Error submitting.');btn.disabled=false;btn.textContent='Log Call ⚡';return}}
+incrementContributorCount();
+qsSessionCount++;
+document.getElementById('qsCounter').textContent=`${qsSessionCount} logged this session`;
+const body=document.getElementById('qsBody');
+document.getElementById('qsFooter').style.display='none';
+body.innerHTML=`<div class="qs-success"><div class="check">✅</div><p>Call #${qsSessionCount} logged to ${zip}</p><p style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:4px">${qsOutcome} · ${qsMotivations.join(', ')||'No motivation'}</p><button class="qs-again" onclick="openQuickSubmit()">Log Another ⚡</button></div>`;
+btn.disabled=false;btn.textContent='Log Call ⚡';
+}
+
+// ╔═══════════════════════════════════════════╗
+// ║  AI AUGMENT                               ║
+// ╚═══════════════════════════════════════════╝
+async function runAiAugment(){
+const btn=document.getElementById('aiAugmentBtn');
+const card=document.getElementById('aiResearchCard');
+const content=document.getElementById('aiResearchContent');
+const ctx=window._lastSearch;
+if(!ctx){alert('Search a ZIP code first.');return}
+
+btn.disabled=true;
+btn.querySelector('span:nth-child(2)').innerHTML='Researching...<span class="sub-text">Analyzing call data + researching market trends for '+ctx.zip+'...</span>';
+card.classList.add('visible');
+content.innerHTML=`<div class="ai-loading-research"><div class="typing-dots"><span></span><span></span><span></span></div><p>Gemini is researching real estate market data for ZIP ${ctx.zip}, analyzing your call data, and building anti-cash-buyer scripts...</p></div>`;
+card.scrollIntoView({behavior:'smooth',block:'center'});
+
+const motList=ctx.motTrends.map(m=>`${m.label} (${m.pct}%)`).join(', ');
+const tlList=ctx.tlTrends.map(t=>`${t.label} (${t.pct}%)`).join(', ');
+const topPhrases=ctx.ranked.slice(0,8).map(p=>`"${p.text}"`).join('\n- ');
+const city=ctx.calls[0]?.city||'';
+const state=ctx.calls[0]?.state||'TX';
+const avgPrice=ctx.calls.filter(c=>c.asking_price).map(c=>c.asking_price).slice(0,5).join(', ')||'not available';
+
+const prompt=`You are a real estate cold calling intelligence analyst. You have access to real call data from ZIP code ${ctx.zip}${city?' ('+city+', '+state+')':''}.
+
+REAL CALL DATA FOR ${ctx.zip}:
+- ${ctx.total} total calls analyzed
+- ${ctx.convRate}% conversion rate
+- Top seller motivations: ${motList}
+- Seller timelines: ${tlList}
+- Occupancy: ${Math.round(ctx.vacant/ctx.total*100)}% vacant/absentee, ${Math.round(ctx.tenantOcc/ctx.total*100)}% tenant occupied, ${Math.round(ctx.ownerOcc/ctx.total*100)}% owner occupied
+- Appointment format: ${ctx.phoneA} phone, ${ctx.inPersonA} in-person
+- Asking prices seen: ${avgPrice}
+- Top converting phrases from real calls:
+- ${topPhrases}
+
+Based on this data AND your knowledge of current real estate market conditions, produce the following. Be specific to ZIP ${ctx.zip} — do NOT give generic DFW or national data. Research the specific market conditions for this ZIP code and its immediate surrounding area.
+
+## 1. ANTI-CASH-BUYER VERBIAGE FOR ${ctx.zip}
+Give 4-5 exact counter-scripts for when sellers in ${ctx.zip} say they have a cash offer or are considering a "We Buy Houses" company. Each script should:
+- Counter a specific cash buyer pitch ("we close in 7 days", "no repairs", "no commissions", "guaranteed offer")
+- Use specific dollar amounts based on the asking prices and market values you know for ${ctx.zip}
+- Be immediately usable on a cold call — written as exact words the caller would say
+- Weave in the motivation data (e.g., if Pre-Foreclosure is top motivation, address their urgency while countering the cash offer)
+
+## 2. MARKET TRENDS FOR ZIP ${ctx.zip} — LAST 6 MONTHS
+Research and provide specific market data for ZIP ${ctx.zip} (not DFW metro, not national — THIS zip code):
+- Median home price and 6-month trend
+- Average days on market
+- Inventory levels (months of supply)
+- Year-over-year appreciation
+- Percentage of homes selling above list price
+- Any bidding war or multiple offer trends
+- How MLS-listed homes in ${ctx.zip} compare to off-market/cash sale prices
+
+Frame every stat as a talking point the caller can use on the phone.
+
+## 3. ZIP-SPECIFIC COMBINED SCRIPTS
+Create 4-5 complete cold call scripts that combine:
+- The anti-cash-buyer arguments
+- The ${ctx.zip} market data
+- The real call data (top motivations, successful phrases already proven to work)
+Each script should target a different seller motivation common in ${ctx.zip} and include both an opening and a closing line.
+
+## 4. REALTOR ADVANTAGE TALKING POINTS FOR ${ctx.zip}
+Specific stats and facts that prove why listing with a realtor in ${ctx.zip} gets sellers more money than accepting a cash offer. Use local data, not just NAR national averages.
+
+Use ## headers for each section. Use specific numbers and dollar amounts. Every phrase must be immediately usable on a cold call.`;
+
+try{
+  const response=await fetch(CONFIG.GEMINI_ENDPOINT,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[{text:prompt}]}],
+      generationConfig:{temperature:0.3,maxOutputTokens:4000}
+    })
+  });
+  const data=await response.json();
+  let fullText=data?.candidates?.[0]?.content?.parts?.[0]?.text||'';
+  if(!fullText||fullText.trim().length<100)throw new Error('Insufficient response');
+  content.innerHTML=renderAiResearch(fullText,ctx);
+}catch(e){
+  console.error('AI Augment error:',e);
+  content.innerHTML=`<div style="padding:28px">
+    <div class="card-hdr"><div class="card-ico" style="background:rgba(255,107,107,0.12)">⚠</div><div><div class="card-title">AI Research Failed</div><div class="card-sub">Gemini could not generate the research. Try again in a moment.</div></div></div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:12px">Error: ${e.message||'Unknown error'}. Check your Gemini API key in CONFIG.</p>
+  </div>`;
+}
+
+btn.disabled=false;
+btn.querySelector('span:nth-child(2)').innerHTML='AI Augment — Market Research<span class="sub-text">Anti-cash-buyer verbiage · ZIP-specific market data · 6-month trends</span>';
+}
+
+function renderAiResearch(text, ctx) {
+  const processed = text
+    .replace(/#{2,3}\s*(.+)/g, (m, title) => `</p></div><div class="research-section"><h4><span class="r-icon" style="background:rgba(167,139,250,0.12)">📊</span>${title}</h4><div class="r-content"><p>`)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/"([^"]{15,}?)"/g, (m, quote) => `<div class="r-phrase"><div class="r-tag">Script</div><blockquote>"${quote}"</blockquote></div>`)
+    .replace(/\n\n/g, '</p><p style="margin-top:10px">')
+    .replace(/\n-\s*/g, '<br>• ')
+    .replace(/\n\d+\.\s*/g, (m) => '<br>' + m.trim() + ' ');
+
+  return `<div style="padding:28px">
+    <div class="card-hdr"><div class="card-ico" style="background:rgba(167,139,250,0.12)">✦</div><div><div class="card-title">AI Market Research — ZIP ${ctx.zip}</div><div class="card-sub">Gemini analysis · ${ctx.total} calls + market data · ${new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'})}</div></div></div>
+    <div class="research-section"><div class="r-content"><p>${processed}</p></div></div>
+    <div class="research-divider"></div>
+    <div style="text-align:center;padding:8px 0"><span style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em">Powered by Gemini 2.5 Flash · ${ctx.zip} Call Data · ZIP-Specific Market Research</span></div>
+  </div>`;
+}
+</script>
+</body>
+</html>

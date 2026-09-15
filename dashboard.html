@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadPulse — Manager Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{--bg:#06090e;--surface:#0b1018;--card:#0f1520;--elevated:#141c28;--border:rgba(255,255,255,0.06);--bh:rgba(0,212,170,0.3);--teal:#00d4aa;--red:#ff6b6b;--amber:#fbbf24;--blue:#60a5fa;--purple:#a78bfa;--green:#34d399;--t1:#e8ecf0;--t2:#7a8599;--t3:#4a5568;--fd:'Outfit',sans-serif;--fm:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fd);background:var(--bg);color:var(--t1);min-height:100vh;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(0,212,170,0.1) 0%,transparent 60%);pointer-events:none;z-index:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.hdr{position:sticky;top:0;z-index:100;background:rgba(6,9,14,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 0}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-m{width:34px;height:34px;background:rgba(0,212,170,0.15);border:1px solid rgba(0,212,170,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-weight:600;font-size:12px;color:var(--teal)}
+.logo h1{font-size:14px;font-weight:700;color:white}.logo span{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:0.15em}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.hdr-badge{font-size:10px;font-weight:600;background:rgba(96,165,250,0.12);color:var(--blue);padding:5px 12px;border-radius:8px;text-transform:uppercase;letter-spacing:0.08em}
+.back-link{font-size:12px;color:var(--t3);text-decoration:none;transition:color 0.2s}.back-link:hover{color:var(--teal)}
+.controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:24px 0 4px}
+.tabs{display:flex;gap:2px;flex-wrap:wrap}
+.tab{background:none;border:none;border-bottom:2px solid transparent;padding:10px 14px;font-family:var(--fd);font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;transition:all 0.25s;white-space:nowrap}
+.tab:hover{color:var(--t2)}.tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+.date-filter{display:flex;gap:3px;flex-wrap:wrap}
+.df{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-family:var(--fd);font-size:10px;font-weight:500;color:var(--t3);cursor:pointer;transition:all 0.2s}
+.df:hover{border-color:rgba(255,255,255,0.12);color:var(--t2)}
+.df.active{background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.25);color:var(--teal)}
+.filter-info{font-size:10px;color:var(--t3);margin:8px 0 20px;text-align:right}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:20px;transition:border-color 0.3s}
+.card:hover{border-color:var(--bh)}
+.card-h{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.card-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.card-title{font-size:15px;font-weight:700;color:white}
+.card-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.mot-section{margin-bottom:32px}.mot-section:last-child{margin-bottom:0}
+.mot-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.mot-tag{font-size:12px;font-weight:700;color:white;background:var(--elevated);border:1px solid var(--border);padding:6px 14px;border-radius:10px}
+.mot-stats{font-size:11px;color:var(--t3);font-family:var(--fm)}
+.script-card{background:var(--elevated);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;transition:border-color 0.2s}
+.script-card:last-child{margin-bottom:0}.script-card:hover{border-color:var(--bh)}
+.sc-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 8px;border-radius:5px;margin-bottom:8px}
+.sc-tag.verbiage{background:rgba(52,211,153,0.12);color:var(--green)}
+.script-card blockquote{font-size:13px;line-height:1.65;color:var(--t1);font-style:italic;padding-left:14px;border-left:2px solid var(--teal);margin-bottom:8px}
+.script-card .sc-ctx{font-size:10px;color:var(--t3)}
+.approach-box{background:var(--elevated);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px}
+.approach-box h5{font-size:13px;font-weight:700;color:white;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.approach-box p{font-size:12px;color:var(--t2);line-height:1.6}
+.spd{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;padding:3px 10px;border-radius:6px}
+.spd-fast{background:rgba(255,107,107,0.12);color:var(--red)}.spd-slow{background:rgba(96,165,250,0.12);color:var(--blue)}.spd-med{background:rgba(251,191,36,0.12);color:var(--amber)}
+.compare-select{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;align-items:flex-end}
+.compare-select .cg{flex:1;min-width:180px}
+.compare-select label{display:block;font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;font-weight:600}
+.compare-select select,.agent-select{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-family:var(--fd);font-size:13px;color:white;outline:none;appearance:none;cursor:pointer;transition:border-color 0.2s}
+.compare-select select:focus,.agent-select:focus{border-color:var(--teal)}
+.compare-select select option,.agent-select option{background:var(--card);color:white}
+.compare-btn{background:var(--teal);border:none;border-radius:12px;padding:12px 24px;font-family:var(--fd);font-size:13px;font-weight:700;color:var(--bg);cursor:pointer;transition:all 0.2s;white-space:nowrap;height:44px}
+.compare-btn:hover{background:#00e4ba}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.compare-grid{grid-template-columns:1fr}}
+.caller-col{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;transition:border-color 0.3s}
+.caller-col:hover{border-color:var(--bh)}
+.caller-name{font-size:18px;font-weight:800;color:white;margin-bottom:4px}
+.caller-meta{font-size:11px;color:var(--t3);margin-bottom:16px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stat-box{background:var(--elevated);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.stat-box .sv{font-size:22px;font-weight:800;font-family:var(--fm);color:white}
+.stat-box .sl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px}
+.sec-lbl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;font-weight:600}
+.phrase-list{margin-bottom:20px}
+.phrase-item{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.phrase-item:last-child{border-bottom:none}
+.phrase-item .pi-count{flex-shrink:0;width:24px;height:24px;border-radius:6px;background:rgba(0,212,170,0.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--fm);color:var(--teal)}
+.phrase-item .pi-text{font-size:12px;color:var(--t2);line-height:1.5;font-style:italic}
+.edge-section{margin-top:20px}
+.edge-card{background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.12);border-radius:12px;padding:14px 16px;margin-bottom:8px}
+.edge-card:last-child{margin-bottom:0}
+.edge-card .edge-lbl{font-size:9px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.edge-card p{font-size:12px;color:var(--t2);line-height:1.5;font-style:italic}
+.vs-badge{display:none}
+@media(min-width:769px){.vs-badge{display:flex;align-items:center;justify-content:center;position:absolute;left:50%;top:120px;transform:translateX(-50%);width:48px;height:48px;border-radius:50%;background:var(--bg);border:1px solid var(--border);z-index:2;font-size:14px;font-weight:900;color:var(--t3)}}
+.compare-wrap{position:relative}
+.trend-bar-wrap{height:6px;background:rgba(255,255,255,0.04);border-radius:100px;overflow:hidden;margin-top:4px}
+.trend-fill{height:100%;border-radius:100px;transition:width 0.6s ease}
+.trend-row{margin-bottom:12px}.trend-row:last-child{margin-bottom:0}
+.trend-lbl{display:flex;justify-content:space-between;font-size:12px}
+.trend-lbl .tv{font-family:var(--fm);font-weight:700;color:white;font-size:12px}
+/* Agent profile */
+.agent-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.agent-profile-grid{grid-template-columns:1fr}}
+.agent-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.agent-avatar{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(0,212,170,0.2),rgba(96,165,250,0.2));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:var(--teal);font-family:var(--fm)}
+.agent-info h3{font-size:20px;font-weight:800;color:white}
+.agent-info p{font-size:12px;color:var(--t3)}
+.empty{text-align:center;padding:48px 20px}
+.empty .icon{font-size:40px;margin-bottom:12px;opacity:0.25}
+.empty h4{font-size:15px;font-weight:700;color:var(--t2);margin-bottom:6px}
+.empty p{font-size:12px;color:var(--t3);max-width:400px;margin:0 auto;line-height:1.6}
+.loader{text-align:center;padding:40px}.loader .sp{width:40px;height:40px;margin:0 auto 16px;border:2px solid rgba(0,212,170,0.15);border-top-color:var(--teal);border-radius:50%;animation:spin 0.8s linear infinite}
+.loader p{font-size:12px;color:var(--t3)}
+.footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;margin-top:40px}
+.footer p{font-size:11px;color:var(--t3)}.footer a{color:var(--teal);text-decoration:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fade{animation:fadeUp 0.5s ease-out}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr"><div class="hdr-inner">
+    <div class="logo"><div class="logo-m">LP</div><div><h1>LeadPulse Consultancy</h1><span>Manager Dashboard</span></div></div>
+    <div class="hdr-right">
+      <span class="hdr-badge">Read Only</span>
+      <a href="index.html" class="back-link">← Back to Search</a>
+    </div>
+  </div></div>
+
+  <div class="controls">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('scripts',this)">📖 Scripts</button>
+      <button class="tab" onclick="switchTab('compare',this)">⚔ Compare</button>
+      <button class="tab" onclick="switchTab('agents',this)">👤 Agent Profiles</button>
+    </div>
+    <div class="date-filter">
+      <button class="df" onclick="setDateFilter('week',this)">This Week</button>
+      <button class="df" onclick="setDateFilter('month',this)">This Month</button>
+      <button class="df" onclick="setDateFilter('last_month',this)">Last Month</button>
+      <button class="df" onclick="setDateFilter('3months',this)">3 Months</button>
+      <button class="df active" onclick="setDateFilter('all',this)">All Time</button>
+    </div>
+  </div>
+  <div class="filter-info" id="filterInfo">Showing all data</div>
+
+  <div id="loading" class="loader" style="display:none"><div class="sp"></div><p>Loading call data...</p></div>
+  <div id="scriptsTab" class="fade"></div>
+  <div id="compareTab" style="display:none" class="fade"></div>
+  <div id="agentsTab" style="display:none" class="fade"></div>
+
+  <div class="footer"><p>&copy; 2026 <a href="index.html">LeadPulse Consultancy</a> · Cold call intelligence for listing agents</p></div>
+</div>
+
+<script>
+const CONFIG={SUPABASE_URL:'https://wevgliayhioturfuylkz.supabase.co',SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndldmdsaWF5aGlvdHVyZnV5bGt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxNTExODgsImV4cCI6MjA4OTcyNzE4OH0.06M2kbwIvX7D6EfAmIzsjH1zFFcYJlCPtSMUbjKc4n4'};
+let sbClient=null,demoMode=true,allCalls=[],filteredCalls=[],currentTab='scripts',currentDateFilter='all';
+
+const DEMO_CALLS=[
+{zip:'75216',motivations:['Pre-Foreclosure','Financial Hardship'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',occupancy:'Owner Occupied',appt_format:'In-Person Appointment',duration:14,successful_phrases:['I understand this is a difficult situation','you have options you might not be aware of','No obligation just so I can give you an accurate number'],contributor:'Ken_DFW',agent_name:'Sam',date:'2026-01-15'},
+{zip:'75216',motivations:['Pre-Foreclosure'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',occupancy:'Owner Occupied',appt_format:'Phone Appointment',duration:11,successful_phrases:['I am not here to pressure you','I just wanted to see if you are exploring your options','Would it help if I just ran some numbers'],contributor:'Ken_DFW',agent_name:'Sam',date:'2026-01-22'},
+{zip:'75216',motivations:['Tax Delinquent','Vacant Property'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',occupancy:'Vacant',appt_format:'In-Person Appointment',duration:11,successful_phrases:['I work with investors who can close in as little as 10 days','they handle all the paperwork','We can have an offer ready the same day'],contributor:'Ken_DFW',agent_name:'Sam',date:'2026-02-03'},
+{zip:'75216',motivations:['Inherited Property','Probate'],outcome:'Hot Lead',timeline:'1-3 months',occupancy:'Vacant',appt_format:'Phone Appointment',duration:18,successful_phrases:['I am sorry for your loss','there is absolutely no rush','Can I call you next week just to check in'],contributor:'Ken_DFW',agent_name:'Maria',date:'2026-02-10'},
+{zip:'75216',motivations:['Divorce'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',occupancy:'Owner Occupied',appt_format:'In-Person Appointment',duration:9,successful_phrases:['I can help make this one less thing to worry about','I specialize in quick clean closings','have a written offer within 24 hours'],contributor:'CloserMike',agent_name:'Mike',date:'2026-02-18'},
+{zip:'75216',motivations:['Tired Landlord'],outcome:'Not Interested',timeline:'Not specified',occupancy:'Tenant Occupied',appt_format:'No Appointment',duration:6,successful_phrases:[],contributor:'CloserMike',agent_name:'Mike',date:'2026-02-25'},
+{zip:'75216',motivations:['Tired Landlord','Absentee Owner'],outcome:'Appointment Set',timeline:'1-3 months',occupancy:'Tenant Occupied',appt_format:'Phone Appointment',duration:13,successful_phrases:['dealing with problem tenants from a distance is exhausting','get out from under that stress','If the numbers make sense we can talk about next steps'],contributor:'SarahSets',agent_name:'Sarah',date:'2026-03-05'},
+{zip:'75216',motivations:['Pre-Foreclosure'],outcome:'Callback Requested',timeline:'1-3 months',occupancy:'Owner Occupied',appt_format:'No Appointment',duration:8,successful_phrases:['No pressure at all','I just wanted to reach out in case you were exploring options'],contributor:'SarahSets',agent_name:'Sarah',date:'2026-03-10'},
+{zip:'75217',motivations:['Tax Delinquent'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',occupancy:'Vacant',appt_format:'In-Person Appointment',duration:10,successful_phrases:['I understand there is a deadline approaching','we can close in 10 to 14 days','The sooner we move the more options you have'],contributor:'CloserMike',agent_name:'Mike',date:'2026-01-28'},
+{zip:'75217',motivations:['Absentee Owner','Vacant Property'],outcome:'Callback Requested',timeline:'3-6 months',occupancy:'Vacant',appt_format:'No Appointment',duration:7,successful_phrases:['what it could be doing for you instead of costing you'],contributor:'RealJay',agent_name:'Jay',date:'2026-02-14'},
+{zip:'75217',motivations:['Financial Hardship'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',occupancy:'Owner Occupied',appt_format:'Phone Appointment',duration:12,successful_phrases:['There is no judgment here just options','Let me put together a few scenarios for you'],contributor:'Ken_DFW',agent_name:'Sam',date:'2026-03-01'},
+{zip:'75217',motivations:['Tired Landlord'],outcome:'Appointment Set',timeline:'1-3 months',occupancy:'Tenant Occupied',appt_format:'Phone Appointment',duration:9,successful_phrases:['done dealing with tenant headaches','What if I could get you a fair cash offer so you can move on'],contributor:'RealJay',agent_name:'Jay',date:'2026-03-12'},
+{zip:'75228',motivations:['Inherited Property'],outcome:'Hot Lead',timeline:'1-3 months',occupancy:'Vacant',appt_format:'Phone Appointment',duration:22,successful_phrases:['I am so sorry for your loss','I can help make this process as easy as possible','There is no timeline'],contributor:'SarahSets',agent_name:'Maria',date:'2026-01-20'},
+{zip:'75228',motivations:['Senior Owner','Downsizing'],outcome:'Appointment Set',timeline:'3-6 months',occupancy:'Owner Occupied',appt_format:'In-Person Appointment',duration:15,successful_phrases:['There is no timeline pressure','I just want to make sure you get the best outcome','I would love to see the home and give you an honest assessment'],contributor:'Ken_DFW',agent_name:'Sam',date:'2026-02-08'},
+{zip:'75228',motivations:['Absentee Owner','Vacant Property'],outcome:'Appointment Set',timeline:'1-3 months',occupancy:'Vacant',appt_format:'Phone Appointment',duration:10,successful_phrases:['Every month that property sits empty it is costing you money','What if we could turn that into cash in your pocket'],contributor:'CloserMike',agent_name:'Mike',date:'2026-02-22'},
+{zip:'75228',motivations:['Probate'],outcome:'Callback Requested',timeline:'3-6 months',occupancy:'Vacant',appt_format:'No Appointment',duration:8,successful_phrases:['I have helped families sell properties during probate many times','I can walk you through the whole process'],contributor:'APTKing',agent_name:'Jay',date:'2026-03-08'},
+{zip:'75203',motivations:['Expired Listing'],outcome:'Appointment Set',timeline:'1-3 months',occupancy:'Owner Occupied',appt_format:'Phone Appointment',duration:13,successful_phrases:['a fresh set of eyes and a different approach','I would love to show you what I think went wrong and how we can fix it'],contributor:'RealJay',agent_name:'Maria',date:'2026-02-05'},
+{zip:'75203',motivations:['Relocation'],outcome:'Appointment Set',timeline:'ASAP (under 2 weeks)',occupancy:'Owner Occupied',appt_format:'In-Person Appointment',duration:11,successful_phrases:['I specialize in fast closings','Let me show you how we can make this happen before your move date','We will have an offer within 48 hours'],contributor:'APTKing',agent_name:'Sam',date:'2026-02-19'},
+{zip:'75203',motivations:['Downsizing'],outcome:'Appointment Set',timeline:'3-6 months',occupancy:'Owner Occupied',appt_format:'Phone Appointment',duration:16,successful_phrases:['A lot of families at this stage want to simplify','I can help you understand exactly what your home is worth'],contributor:'SarahSets',agent_name:'Sarah',date:'2026-03-04'},
+{zip:'75241',motivations:['Financial Hardship','Pre-Foreclosure'],outcome:'Not Interested',timeline:'Not specified',occupancy:'Owner Occupied',appt_format:'No Appointment',duration:4,successful_phrases:[],contributor:'Ken_DFW',agent_name:'Mike',date:'2026-02-12'},
+{zip:'75241',motivations:['Code Violation'],outcome:'Appointment Set',timeline:'3-6 months',occupancy:'Tenant Occupied',appt_format:'Phone Appointment',duration:9,successful_phrases:['You do not have to fix anything','Investors buy properties as-is all the time','What if I could get you an offer that takes all of that off your plate'],contributor:'APTKing',agent_name:'Jay',date:'2026-02-28'},
+{zip:'75241',motivations:['Vacant Property','Absentee Owner'],outcome:'Appointment Set',timeline:'1-3 months',occupancy:'Vacant',appt_format:'In-Person Appointment',duration:8,successful_phrases:['That property is not making you money sitting empty','Let me take that burden off you'],contributor:'CloserMike',agent_name:'Sam',date:'2026-03-15'},
+];
+
+// ═══ INIT ═══
+document.addEventListener('DOMContentLoaded',async()=>{
+  if(CONFIG.SUPABASE_URL&&CONFIG.SUPABASE_ANON_KEY){
+    try{sbClient=window.supabase.createClient(CONFIG.SUPABASE_URL,CONFIG.SUPABASE_ANON_KEY);demoMode=false}catch(e){}
+  }
+  document.getElementById('loading').style.display='block';
+  if(demoMode){await new Promise(r=>setTimeout(r,600));allCalls=DEMO_CALLS}
+  else{try{const{data}=await sbClient.from('calls').select('*');allCalls=data||DEMO_CALLS}catch(e){allCalls=DEMO_CALLS}}
+  document.getElementById('loading').style.display='none';
+  applyDateFilter();
+});
+
+// ═══ TABS ═══
+function switchTab(t,el){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  document.getElementById('scriptsTab').style.display=t==='scripts'?'':'none';
+  document.getElementById('compareTab').style.display=t==='compare'?'':'none';
+  document.getElementById('agentsTab').style.display=t==='agents'?'':'none';
+}
+
+// ═══ DATE FILTER ═══
+function setDateFilter(f,el){
+  currentDateFilter=f;
+  document.querySelectorAll('.df').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  applyDateFilter();
+}
+
+function applyDateFilter(){
+  const now=new Date();
+  const today=now.toISOString().split('T')[0];
+  let startDate='';
+  let label='Showing all data';
+
+  if(currentDateFilter==='week'){
+    const d=new Date(now);d.setDate(d.getDate()-d.getDay());
+    startDate=d.toISOString().split('T')[0];
+    label='Showing this week';
+  } else if(currentDateFilter==='month'){
+    startDate=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-01`;
+    label='Showing this month';
+  } else if(currentDateFilter==='last_month'){
+    const lm=new Date(now.getFullYear(),now.getMonth()-1,1);
+    const lmEnd=new Date(now.getFullYear(),now.getMonth(),0);
+    startDate=lm.toISOString().split('T')[0];
+    const endDate=lmEnd.toISOString().split('T')[0];
+    filteredCalls=allCalls.filter(c=>c.date&&c.date>=startDate&&c.date<=endDate);
+    label=`Showing last month (${filteredCalls.length} calls)`;
+    document.getElementById('filterInfo').textContent=label;
+    rebuildAll();return;
+  } else if(currentDateFilter==='3months'){
+    const d=new Date(now);d.setMonth(d.getMonth()-3);
+    startDate=d.toISOString().split('T')[0];
+    label='Showing last 3 months';
+  }
+
+  if(startDate){
+    filteredCalls=allCalls.filter(c=>c.date&&c.date>=startDate);
+  } else {
+    filteredCalls=[...allCalls];
+  }
+  label+=` (${filteredCalls.length} calls)`;
+  document.getElementById('filterInfo').textContent=label;
+  rebuildAll();
+}
+
+function rebuildAll(){
+  buildScriptLibrary();
+  buildCompareTab();
+  buildAgentsTab();
+}
+
+// ═══ SCRIPT TRAINING LIBRARY ═══
+function buildScriptLibrary(){
+  const el=document.getElementById('scriptsTab');
+  const calls=filteredCalls;
+  const successCalls=calls.filter(c=>c.outcome==='Appointment Set'||c.outcome==='Hot Lead');
+  const motPhrases={};
+  successCalls.forEach(c=>{
+    (c.motivations||[]).forEach(m=>{
+      if(!motPhrases[m])motPhrases[m]={phrases:{},calls:0,avgDur:[],timelines:{},occupancies:{},apptFormats:{}};
+      motPhrases[m].calls++;
+      if(c.duration)motPhrases[m].avgDur.push(c.duration);
+      if(c.timeline)motPhrases[m].timelines[c.timeline]=(motPhrases[m].timelines[c.timeline]||0)+1;
+      if(c.occupancy)motPhrases[m].occupancies[c.occupancy]=(motPhrases[m].occupancies[c.occupancy]||0)+1;
+      if(c.appt_format&&c.appt_format!=='No Appointment')motPhrases[m].apptFormats[c.appt_format]=(motPhrases[m].apptFormats[c.appt_format]||0)+1;
+      (c.successful_phrases||[]).forEach(p=>{
+        if(!p||!p.trim())return;const k=p.trim().toLowerCase();
+        if(!motPhrases[m].phrases[k])motPhrases[m].phrases[k]={text:p.trim(),count:0,agents:new Set()};
+        motPhrases[m].phrases[k].count++;
+        if(c.agent_name)motPhrases[m].phrases[k].agents.add(c.agent_name);
+      });
+    });
+  });
+  const sorted=Object.entries(motPhrases).sort((a,b)=>b[1].calls-a[1].calls);
+  if(!sorted.length){el.innerHTML=`<div class="card"><div class="empty"><div class="icon">📖</div><h4>No Training Data</h4><p>No successful calls in this date range. Try "All Time" or submit more calls.</p></div></div>`;return}
+
+  const distressed=['Pre-Foreclosure','Tax Delinquent','Financial Hardship','Divorce'];
+  const emotional=['Inherited Property','Probate','Senior Owner','Downsizing'];
+  const landlord=['Tired Landlord','Absentee Owner'];
+
+  let html=`<div class="card"><div class="card-h"><div class="card-ico" style="background:rgba(52,211,153,0.12)">📖</div><div><div class="card-title">Script Training Library</div><div class="card-sub">From ${successCalls.length} successful calls · By motivation type</div></div></div></div>`;
+  sorted.forEach(([mot,data])=>{
+    const phrases=Object.values(data.phrases).sort((a,b)=>b.count-a.count);
+    const avgD=data.avgDur.length?Math.round(data.avgDur.reduce((a,b)=>a+b,0)/data.avgDur.length):'—';
+    const topTl=Object.entries(data.timelines).sort((a,b)=>b[1]-a[1])[0];
+    const topFmt=Object.entries(data.apptFormats).sort((a,b)=>b[1]-a[1])[0];
+    let approach={speed:'ADAPT',cls:'spd-med',desc:'Mirror the seller\'s energy.'};
+    if(distressed.includes(mot))approach={speed:'FAST',cls:'spd-fast',desc:'Lead with solutions and speed. Acknowledge, then present value in 30 seconds.'};
+    if(emotional.includes(mot))approach={speed:'SLOW',cls:'spd-slow',desc:'Acknowledge personally. No price upfront. Let them talk. 15-20+ min calls convert highest.'};
+    if(landlord.includes(mot))approach={speed:'DIRECT',cls:'spd-med',desc:'Frame as a business problem. Numbers and logic. "Let me get you a range."'};
+    html+=`<div class="mot-section"><div class="mot-header"><span class="mot-tag">${mot}</span><span class="mot-stats">${data.calls} calls · avg ${avgD}m${topTl?` · ${topTl[0].split('(')[0].trim().toLowerCase()}`:''}${topFmt?` · ${topFmt[0].toLowerCase()}`:''}</span></div>
+    <div class="approach-box"><h5><span class="spd ${approach.cls}">${approach.speed}</span>${mot}</h5><p>${approach.desc}</p></div>
+    ${phrases.length?`<div class="sec-lbl" style="margin-top:14px">Proven Phrases (${phrases.length})</div>${phrases.slice(0,6).map(p=>`<div class="script-card"><span class="sc-tag verbiage">Used ${p.count}x${p.agents.size>1?` · ${p.agents.size} agents`:p.agents.size===1?` · ${[...p.agents][0]}`:''}</span><blockquote>"${p.text}"</blockquote></div>`).join('')}`:'<p style="font-size:12px;color:var(--t3);padding:12px 0">No phrases logged yet for ${mot}.</p>'}
+    </div>`;
+  });
+  el.innerHTML=html;
+}
+
+// ═══ CALLER COMPARISON ═══
+function buildCompareTab(){
+  const el=document.getElementById('compareTab');
+  const agents=[...new Set(filteredCalls.map(c=>c.agent_name).filter(Boolean))].sort();
+  if(agents.length<2){el.innerHTML=`<div class="card"><div class="empty"><div class="icon">⚔</div><h4>Need 2+ Agents</h4><p>Comparison requires at least two agents with data in this date range.</p></div></div>`;return}
+  el.innerHTML=`<div class="card"><div class="card-h"><div class="card-ico" style="background:rgba(96,165,250,0.12)">⚔</div><div><div class="card-title">Agent Comparison</div><div class="card-sub">Side-by-side — see what the top performer says differently</div></div></div>
+  <div class="compare-select"><div class="cg"><label>Agent A</label><select id="callerA">${agents.map((c,i)=>`<option${i===0?' selected':''}>${c}</option>`).join('')}</select></div><div class="cg"><label>Agent B</label><select id="callerB">${agents.map((c,i)=>`<option${i===1?' selected':''}>${c}</option>`).join('')}</select></div><button class="compare-btn" onclick="runComparison()">Compare</button></div></div><div id="compareResult"></div>`;
+  runComparison();
+}
+
+function runComparison(){
+  const a=document.getElementById('callerA').value,b=document.getElementById('callerB').value;
+  if(a===b){alert('Select two different agents.');return}
+  const sA=getAgentStats(a),sB=getAgentStats(b);
+  const topIs=sA.convRate>=sB.convRate?'A':'B';
+  const top=topIs==='A'?sA:sB,bot=topIs==='A'?sB:sA;
+  const topN=topIs==='A'?a:b,botN=topIs==='A'?b:a;
+  const topPS=new Set(top.phrases.map(p=>p.text.toLowerCase())),botPS=new Set(bot.phrases.map(p=>p.text.toLowerCase()));
+  const uniqTop=top.phrases.filter(p=>!botPS.has(p.text.toLowerCase())),uniqBot=bot.phrases.filter(p=>!topPS.has(p.text.toLowerCase()));
+  document.getElementById('compareResult').innerHTML=`<div class="compare-wrap"><div class="vs-badge">VS</div><div class="compare-grid">${renderCol(a,sA,topIs==='A',uniqTop,topIs==='A')}${renderCol(b,sB,topIs==='B',uniqBot,topIs==='B')}</div></div>
+  <div class="card" style="margin-top:20px"><div class="card-h"><div class="card-ico" style="background:rgba(0,212,170,0.12)">🧠</div><div><div class="card-title">Coaching Insight</div><div class="card-sub">What ${topN} does differently</div></div></div>
+  ${uniqTop.length?`<div class="sec-lbl">Phrases only ${topN} uses</div>${uniqTop.slice(0,5).map(p=>`<div class="edge-card"><div class="edge-lbl">${topN}'s Edge</div><p>"${p.text}"</p></div>`).join('')}`:`<p style="font-size:12px;color:var(--t3)">Both use similar phrases. Difference may be in delivery.</p>`}
+  ${top.convRate-bot.convRate>10?`<div style="margin-top:16px;background:rgba(255,107,107,0.06);border:1px solid rgba(255,107,107,0.12);border-radius:12px;padding:14px 16px"><div style="font-size:9px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Gap: ${(top.convRate-bot.convRate).toFixed(0)}%</div><p style="font-size:12px;color:var(--t2);line-height:1.5">${topN} converts at ${top.convRate}% vs ${botN} at ${bot.convRate}%. ${top.avgDur>bot.avgDur?topN+' spends longer per call — longer calls correlate with higher conversion.':topN+' is faster but more efficient.'}</p></div>`:''}</div>`;
+}
+
+// ═══ AGENT PROFILES ═══
+function buildAgentsTab(){
+  const el=document.getElementById('agentsTab');
+  const agents=[...new Set(filteredCalls.map(c=>c.agent_name).filter(Boolean))].sort();
+  if(!agents.length){el.innerHTML=`<div class="card"><div class="empty"><div class="icon">👤</div><h4>No Agent Data</h4><p>No calls with agent names in this date range. Add agent names when submitting calls.</p></div></div>`;return}
+
+  el.innerHTML=`<div class="card"><div class="card-h"><div class="card-ico" style="background:rgba(167,139,250,0.12)">👤</div><div><div class="card-title">Agent Profiles</div><div class="card-sub">Select an agent to see their full performance analysis</div></div></div>
+  <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
+    <div style="flex:1;min-width:200px"><label style="display:block;font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;font-weight:600">Agent</label><select class="agent-select" id="agentSelect">${agents.map((a,i)=>`<option${i===0?' selected':''}>${a}</option>`).join('')}</select></div>
+    <button class="compare-btn" onclick="renderAgentProfile()">View Profile</button>
+  </div></div><div id="agentProfileResult"></div>`;
+  renderAgentProfile();
+}
+
+function renderAgentProfile(){
+  const name=document.getElementById('agentSelect').value;
+  const s=getAgentStats(name);
+  const res=document.getElementById('agentProfileResult');
+  if(!s.total){res.innerHTML=`<div class="card"><div class="empty"><div class="icon">📭</div><h4>No data for ${name}</h4></div></div>`;return}
+
+  // Motivation breakdown
+  const motCounts={};
+  s.allCalls.forEach(c=>(c.motivations||[]).forEach(m=>{motCounts[m]=(motCounts[m]||0)+1}));
+  const motTotal=Object.values(motCounts).reduce((a,b)=>a+b,0)||1;
+  const motSorted=Object.entries(motCounts).map(([l,c])=>({label:l,count:c,pct:Math.round(c/motTotal*100)})).sort((a,b)=>b.count-a.count).slice(0,6);
+
+  // Outcome breakdown
+  const outCounts={};
+  s.allCalls.forEach(c=>{outCounts[c.outcome]=(outCounts[c.outcome]||0)+1});
+  const outSorted=Object.entries(outCounts).map(([l,c])=>({label:l,count:c,pct:Math.round(c/s.total*100)})).sort((a,b)=>b.count-a.count);
+
+  // Approach tendency
+  const distressed=['Pre-Foreclosure','Tax Delinquent','Financial Hardship','Divorce'];
+  const emotional=['Inherited Property','Probate','Senior Owner','Downsizing'];
+  const dCalls=s.allCalls.filter(c=>(c.motivations||[]).some(m=>distressed.includes(m))).length;
+  const eCalls=s.allCalls.filter(c=>(c.motivations||[]).some(m=>emotional.includes(m))).length;
+  let primaryApproach='Adaptive';
+  if(dCalls>eCalls*2)primaryApproach='Fast/Direct — mostly distressed sellers';
+  else if(eCalls>dCalls*2)primaryApproach='Slow/Empathetic — mostly life-transition sellers';
+  else if(dCalls>0&&eCalls>0)primaryApproach='Mixed — handles both distressed and emotional sellers';
+
+  res.innerHTML=`
+  <div class="card">
+    <div class="agent-header">
+      <div class="agent-avatar">${name.charAt(0).toUpperCase()}</div>
+      <div class="agent-info">
+        <h3>${name}</h3>
+        <p>${s.total} calls · ${s.zips.length} ZIP${s.zips.length!==1?'s':''} · ${s.topFormat||'—'} preferred · ${primaryApproach}</p>
+      </div>
+    </div>
+
+    <div class="stat-row" style="grid-template-columns:repeat(5,1fr)">
+      <div class="stat-box"><div class="sv">${s.total}</div><div class="sl">Total Calls</div></div>
+      <div class="stat-box"><div class="sv">${s.appts}</div><div class="sl">Appointments</div></div>
+      <div class="stat-box"><div class="sv" style="color:var(--teal)">${s.convRate}%</div><div class="sl">Conversion</div></div>
+      <div class="stat-box"><div class="sv">${s.avgDur}<span style="font-size:11px;color:var(--t3)">m</span></div><div class="sl">Avg Duration</div></div>
+      <div class="stat-box"><div class="sv">${s.phrases.length}</div><div class="sl">Unique Phrases</div></div>
+    </div>
+  </div>
+
+  <div class="agent-profile-grid">
+    <div class="card">
+      <div class="card-h"><div class="card-ico" style="background:rgba(0,212,170,0.12)">🎯</div><div><div class="card-title">Motivation Strengths</div><div class="card-sub">What types of leads ${name} calls most</div></div></div>
+      ${motSorted.map(m=>`<div class="trend-row"><div class="trend-lbl"><span style="color:var(--t2)">${m.label}</span><span class="tv">${m.pct}%</span></div><div class="trend-bar-wrap"><div class="trend-fill" style="width:${m.pct}%;background:linear-gradient(90deg,var(--teal),rgba(0,212,170,0.5))"></div></div></div>`).join('')}
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="card-ico" style="background:rgba(96,165,250,0.12)">📊</div><div><div class="card-title">Outcome Breakdown</div><div class="card-sub">How ${name}'s calls typically end</div></div></div>
+      ${outSorted.map(o=>{
+        const color=o.label==='Appointment Set'?'var(--teal)':o.label==='Hot Lead'?'var(--red)':o.label==='Callback Requested'?'var(--amber)':o.label==='Not Interested'?'var(--red)':'var(--t3)';
+        return`<div class="trend-row"><div class="trend-lbl"><span style="color:var(--t2)">${o.label}</span><span class="tv">${o.pct}%</span></div><div class="trend-bar-wrap"><div class="trend-fill" style="width:${o.pct}%;background:${color}"></div></div></div>`;
+      }).join('')}
+    </div>
+
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-h"><div class="card-ico" style="background:rgba(52,211,153,0.12)">💬</div><div><div class="card-title">${name}'s Signature Phrases</div><div class="card-sub">Most-used phrases from successful calls — ranked by frequency</div></div></div>
+      ${s.phrases.length?`<div class="phrase-list">${s.phrases.slice(0,10).map(p=>`<div class="phrase-item"><div class="pi-count">${p.count}</div><div class="pi-text">"${p.text}"</div></div>`).join('')}</div>`:`<p style="font-size:12px;color:var(--t3)">No phrases logged yet. Submit calls with the "Successful Phrases" field.</p>`}
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="card-ico" style="background:rgba(251,191,36,0.12)">📍</div><div><div class="card-title">ZIPs Worked</div><div class="card-sub">Where ${name} has made calls</div></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${s.zipStats.map(z=>`<div style="background:var(--elevated);border:1px solid var(--border);border-radius:8px;padding:8px 12px;text-align:center"><div style="font-family:var(--fm);font-size:13px;font-weight:700;color:white">${z.zip}</div><div style="font-size:9px;color:var(--t3);margin-top:2px">${z.count} calls · ${z.convRate}%</div></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="card-ico" style="background:rgba(167,139,250,0.12)">⚡</div><div><div class="card-title">Approach Profile</div><div class="card-sub">How ${name} typically handles calls</div></div></div>
+      <div class="approach-box"><h5>Primary Style</h5><p>${primaryApproach}</p></div>
+      <div class="approach-box"><h5>Format Preference</h5><p>${s.topFormat?s.topFormat+' appointments':'No preference detected'}</p></div>
+      <div class="approach-box"><h5>Call Length</h5><p>Average ${s.avgDur} minutes per call. ${s.avgDur>=12?'Longer calls — takes time to build rapport.':s.avgDur>=8?'Moderate length — balanced approach.':'Quick calls — gets to the point fast.'}</p></div>
+    </div>
+  </div>`;
+}
+
+// ═══ SHARED STATS ═══
+function getAgentStats(name){
+  const calls=filteredCalls.filter(c=>c.agent_name===name);
+  const total=calls.length;
+  const appts=calls.filter(c=>c.outcome==='Appointment Set'||c.outcome==='Hot Lead');
+  const convRate=total?Math.round((appts.length/total)*1000)/10:0;
+  const durs=calls.filter(c=>c.duration).map(c=>c.duration);
+  const avgDur=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):0;
+  const phrases=[];
+  appts.forEach(c=>(c.successful_phrases||[]).forEach(p=>{
+    if(!p||!p.trim())return;const k=p.trim().toLowerCase();
+    const ex=phrases.find(x=>x.text.toLowerCase()===k);
+    if(ex)ex.count++;else phrases.push({text:p.trim(),count:1});
+  }));
+  phrases.sort((a,b)=>b.count-a.count);
+  const fmtCounts={};
+  appts.forEach(c=>{if(c.appt_format&&c.appt_format!=='No Appointment')fmtCounts[c.appt_format]=(fmtCounts[c.appt_format]||0)+1});
+  const topFormat=Object.entries(fmtCounts).sort((a,b)=>b[1]-a[1])[0]?.[0]||'';
+  const zips=[...new Set(calls.map(c=>c.zip))];
+  const zipStats=zips.map(z=>{
+    const zCalls=calls.filter(c=>c.zip===z);
+    const zAppts=zCalls.filter(c=>c.outcome==='Appointment Set'||c.outcome==='Hot Lead');
+    return{zip:z,count:zCalls.length,convRate:zCalls.length?Math.round(zAppts.length/zCalls.length*100):0};
+  }).sort((a,b)=>b.count-a.count);
+  const motCounts={};
+  calls.forEach(c=>(c.motivations||[]).forEach(m=>{motCounts[m]=(motCounts[m]||0)+1}));
+  const topMots=Object.entries(motCounts).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  return{total,appts:appts.length,convRate,avgDur,phrases,topFormat,zips,zipStats,topMots,allCalls:calls};
+}
+
+function renderCol(name,s,isTop,uniq,showEdge){
+  return`<div class="caller-col" style="${isTop?'border-color:rgba(0,212,170,0.3)':''}">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="caller-name">${name}</div>${isTop?'<span style="font-size:10px;font-weight:700;color:var(--teal);background:rgba(0,212,170,0.1);padding:2px 8px;border-radius:5px">TOP</span>':''}</div>
+  <div class="caller-meta">${s.zips.length} ZIP${s.zips.length!==1?'s':''} · ${s.topMots.map(m=>m[0]).join(', ')||'—'}</div>
+  <div class="stat-row"><div class="stat-box"><div class="sv">${s.total}</div><div class="sl">Calls</div></div><div class="stat-box"><div class="sv" style="color:var(--teal)">${s.convRate}%</div><div class="sl">Conversion</div></div><div class="stat-box"><div class="sv">${s.avgDur}<span style="font-size:11px;color:var(--t3)">m</span></div><div class="sl">Avg Duration</div></div></div>
+  <div class="stat-row" style="grid-template-columns:1fr 1fr"><div class="stat-box"><div class="sv" style="font-size:16px">${s.appts}</div><div class="sl">Appointments</div></div><div class="stat-box"><div class="sv" style="font-size:14px;color:var(--blue)">${s.topFormat||'—'}</div><div class="sl">Preferred Format</div></div></div>
+  ${s.phrases.length?`<div class="sec-lbl">Top Phrases</div><div class="phrase-list">${s.phrases.slice(0,5).map(p=>`<div class="phrase-item"><div class="pi-count">${p.count}</div><div class="pi-text">"${p.text}"</div></div>`).join('')}</div>`:'<p style="font-size:12px;color:var(--t3);margin-bottom:16px">No phrases logged.</p>'}
+  ${showEdge&&uniq.length?`<div class="edge-section"><div class="sec-lbl" style="color:var(--teal)">Only ${name} uses</div>${uniq.slice(0,3).map(p=>`<div class="edge-card"><div class="edge-lbl">${name}'s Edge</div><p>"${p.text}"</p></div>`).join('')}</div>`:''}
+  </div>`;
+}
+</script>
+</body>
+</html>
